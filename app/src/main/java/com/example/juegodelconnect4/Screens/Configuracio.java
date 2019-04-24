@@ -1,4 +1,7 @@
 package com.example.juegodelconnect4.Screens;
 
-public class Configuracio {
+import android.app.Activity;
+
+public class Configuracio extends Activity {
+
 }
