@@ -1,6 +1,7 @@
 package com.example.juegodelconnect4.Logic;
 
 public class Position {
+/*
     public final int row;
     public final int column;
 
@@ -29,5 +30,6 @@ public class Position {
         // pos1 and pos2 are aligned horizontally, vertically or diagonally???
         return 0;
     }
+*/
 
 }

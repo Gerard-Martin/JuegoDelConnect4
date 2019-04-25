@@ -9,21 +9,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Screens.Main">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity
-            android:name=".Screens.Ajuda"
-            android:label="@string/ajuda" />
-        <activity
-            android:name=".Screens.Configuracio"
-            android:label="@string/configuracio" />
+        <activity android:name=".Screens.Correo"></activity>
+        <activity android:name=".Screens.Game" />
         <activity
             android:name=".Screens.Resultat"
             android:label="@string/resultat" />
+        <activity android:name=".Screens.Ajuda" />
+        <activity android:name=".Screens.Configuracio" />
+        <activity android:name=".Screens.Main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
