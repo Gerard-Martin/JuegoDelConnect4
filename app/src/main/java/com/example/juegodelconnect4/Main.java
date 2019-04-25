@@ -1,4 +1,4 @@
-package com.example.juegodelconnect4.Screens;
+package com.example.juegodelconnect4;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;

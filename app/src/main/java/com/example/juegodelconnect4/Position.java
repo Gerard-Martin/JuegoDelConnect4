@@ -1,4 +1,4 @@
-package com.example.juegodelconnect4.Logic;
+package com.example.juegodelconnect4;
 
 public class Position {
 /*
