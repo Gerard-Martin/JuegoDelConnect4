@@ -1,4 +1,4 @@
-package com.example.juegodelconnect4;
+package com.example.juegodelconnect4.Logica;
 
 public class Direction {
     public static final Direction DOWN  = new Direction(1,  0);

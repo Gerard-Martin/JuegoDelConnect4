@@ -1,4 +1,4 @@
-package com.example.juegodelconnect4;
+package com.example.juegodelconnect4.Logica;
 
 import android.os.Parcelable;
 

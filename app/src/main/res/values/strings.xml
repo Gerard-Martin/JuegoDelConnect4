@@ -7,7 +7,7 @@
     <string name="sortir">Sortir</string>
     <string name="action_settings">Settings</string>
     <string name="enviaremail">Enviar e-mail</string>
-    <string name="descripcio">El joc consisteix en anar introduin fitxes en un tauler vertical amb l'objectiu d'alinear 4 consecutives del color assignat al jugador (roig) abans que el teu oponent.\n Per torns, els jugadors han d'introduir una fitxa en la columna que prefereixin (sempre que no estigui completa) i aquesta caurà a la posició més baixa. Guanya la partida el primer que aconsegueixi alinear quatre fitxes consecutives d'un mateix color en horitzontal, vertical o diagonal.\n Si totes les columnes estan plenes però ningú ha fet una fila vàlida, hi ha empat.​</string>
+    <string name="descripcio">El joc consisteix en anar introduin fitxes en un tauler vertical amb l\'objectiu d\'alinear 4 consecutives del color assignat al jugador (roig) abans que el teu oponent.\n Per torns, els jugadors han d\'introduir una fitxa en la columna que prefereixin (sempre que no estigui completa) i aquesta caurà a la posició més baixa. Guanya la partida el primer que aconsegueixi alinear quatre fitxes consecutives d\'un mateix color en horitzontal, vertical o diagonal.\n Si totes les columnes estan plenes però ningú ha fet una fila vàlida, hi ha empat.​</string>
     <string name="tornar">Anar al joc</string>
     <string name="alias">Alias Identificatiu</string>
     <string name="midagraella">Mida graella seleccionada: 7</string>

@@ -9,13 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Game" />
+        <activity android:name=".Logica.Game" />
         <activity
-            android:name=".Resultat"
+            android:name=".Screens.Resultat"
             android:label="@string/resultat" />
-        <activity android:name=".Ajuda" />
-        <activity android:name=".Configuracio" />
-        <activity android:name=".Main">
+        <activity android:name=".Screens.Ajuda" />
+        <activity android:name=".Screens.Configuracio" />
+        <activity android:name=".Screens.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

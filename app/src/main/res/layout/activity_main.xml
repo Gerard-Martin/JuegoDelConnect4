@@ -1,63 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <ScrollView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <RelativeLayout
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
             android:paddingLeft="16dp"
-            android:paddingRight="16dp" >
+            android:orientation="vertical"
+            android:gravity="center"
+            android:paddingRight="16dp"  >
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="200dp"
                 android:layout_marginTop="@dimen/mup"
                 android:layout_marginBottom="@dimen/mup"
                 android:layout_height="@dimen/size"
-                android:layout_centerHorizontal="true"
                 app:srcCompat="@mipmap/icon" />
             <TextView
                 android:id="@+id/textView"
-                android:layout_below="@+id/imageView"
-                android:layout_centerHorizontal="true"
                 android:textSize="@dimen/t"
                 android:layout_marginBottom="@dimen/mup"
                 app:fontFamily="sans-serif-thin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/app_name" />
-            <Button
-                android:id="@+id/ajuda"
-                android:onClick="mostrarAjuda"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ajuda" />
+        </LinearLayout>
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="200dp"
+            android:layout_height="0dp"
+            android:paddingLeft="16dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            android:paddingRight="16dp" >
+
             <Button
                 android:id="@+id/com"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/ajuda"
-                android:onClick="configuracio"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="comencar"
                 android:text="@string/comencar" />
+
+            <Button
+                android:id="@+id/ajuda"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="mostrarAjuda"
+                android:text="@string/ajuda" />
+
             <Button
                 android:id="@+id/sort"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/com"
-                android:layout_width="wrap_content"
-                android:onClick="sortir"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:onClick="sortir"
                 android:text="@string/sortir" />
-        </RelativeLayout>
-    </ScrollView>
-</LinearLayout>
+        </LinearLayout>
+    </LinearLayout>

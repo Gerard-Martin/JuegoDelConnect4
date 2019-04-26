@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
         android:layout_weight="0">
         <TextView
             android:id="@+id/textView"
             android:textSize="@dimen/tm"
-            android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/mup"
             android:layout_marginBottom="@dimen/mup"
             app:fontFamily="sans-serif-thin"
@@ -19,11 +19,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name" />
-    </RelativeLayout>
+    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/scroll"
+        android:layout_marginStart="@dimen/mupm"
+        android:layout_marginEnd="@dimen/mupm"
         android:layout_weight="1">
 
         <TextView
@@ -36,16 +38,17 @@
             android:layout_marginBottom="@dimen/mup"
             android:text="@string/descripcio" />
     </ScrollView>
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
+        android:gravity="center"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/mupm"
         android:layout_weight="0">
         <Button
             android:id="@+id/ajuda"
-            android:layout_centerHorizontal="true"
             android:onClick="tornarPrincipal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tornar" />
-    </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>
