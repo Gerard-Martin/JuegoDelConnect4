@@ -58,7 +58,7 @@
                 android:layout_height="wrap_content"
                 android:defaultValue="0"
                 style="@style/Widget.AppCompat.SeekBar.Discrete"
-                android:max="6"/>
+                android:max="2"/>
             <LinearLayout
                 android:id="@+id/checkBoxl"
                 android:layout_marginTop="@dimen/mupm"
