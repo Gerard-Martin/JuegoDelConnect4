@@ -80,21 +80,6 @@
                     android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
-                android:id="@+id/checkBoxl2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/mupm">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/mup"
-                    android:text="@string/jugarcpu"/>
-                <Switch
-                    android:id="@+id/checkBox1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
-            <LinearLayout
                 android:id="@+id/tes"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -110,42 +95,6 @@
                 <NumberPicker android:id="@+id/numberpicker"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"  />
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/radiobutton"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="@dimen/mupm"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
-                    android:id="@+id/dificultattext"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dificult"
-                    app:fontFamily="sans-serif-thin" />
-                <RadioGroup
-                    android:id="@+id/dificultat"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <RadioButton
-                        android:id="@+id/facil"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="true"
-                        android:text="@string/nfacil" />
-                    <RadioButton
-                        android:id="@+id/mig"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/nmig" />
-                    <RadioButton
-                        android:id="@+id/dificil"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ndificil" />
-                </RadioGroup>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
