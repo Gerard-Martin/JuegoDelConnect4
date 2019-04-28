@@ -94,22 +94,26 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tes"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/mupm"
                 android:gravity="center"
-                android:layout_marginBottom="@dimen/mupm">
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/top"
-                    app:fontFamily="sans-serif-thin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/configt" />
-                <NumberPicker android:id="@+id/numberpicker"
+                    android:text="@string/configt"
+                    app:fontFamily="sans-serif-thin" />
+
+                <NumberPicker
+                    android:id="@+id/numberpicker"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"  />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
             <LinearLayout
                 android:id="@+id/radiobutton"

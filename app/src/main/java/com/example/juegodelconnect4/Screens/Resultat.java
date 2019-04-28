@@ -39,6 +39,7 @@ public class Resultat extends AppCompatActivity {
         ti.setText(date);
 
         customButtons();
+        if(fin == null){fin = new String();}
         compose();
     }
 

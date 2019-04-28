@@ -14,87 +14,106 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/app_name" />
+
     <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/scroll"
         android:layout_weight="1">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:id="@+id/alias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/mupm"
                 android:layout_marginBottom="@dimen/mupm">
+
                 <ImageView
                     android:id="@+id/user"
                     android:layout_width="@dimen/p"
-                    android:layout_marginRight="@dimen/mup"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="@dimen/mup"
                     app:srcCompat="@drawable/alias" />
+
                 <EditText
                     android:id="@+id/aliasc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="@integer/ems"
-                    android:inputType="textPersonName"
-                    android:hint="@string/alias" />
+                    android:hint="@string/alias"
+                    android:inputType="textPersonName" />
             </LinearLayout>
+
             <TextView
                 android:id="@+id/mida"
-                android:layout_marginTop="@dimen/mupm"
-                android:layout_marginBottom="@dimen/mupm"
-                app:fontFamily="sans-serif-thin"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/midagraella" />
+                android:layout_marginTop="@dimen/mupm"
+                android:layout_marginBottom="@dimen/mupm"
+                android:gravity="center"
+                android:text="@string/midagraella"
+                app:fontFamily="sans-serif-thin" />
+
             <SeekBar
                 android:id="@+id/sb"
+                style="@style/Widget.AppCompat.SeekBar.Discrete"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:defaultValue="0"
-                style="@style/Widget.AppCompat.SeekBar.Discrete"
-                android:max="2"/>
+                android:max="2"
+                android:progress="7" />
+
             <LinearLayout
                 android:id="@+id/checkBoxl"
-                android:layout_marginTop="@dimen/mupm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/mupm"
                 android:layout_marginBottom="@dimen/mupm">
+
                 <ImageView
                     android:id="@+id/tim"
                     android:layout_width="@dimen/p"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/timer" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/controldetemps"/>
+                    android:text="@string/controldetemps" />
+
                 <CheckBox
                     android:id="@+id/checkBox"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
             </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tes"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/mupm"
                 android:gravity="center"
-                android:layout_marginBottom="@dimen/mupm">
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/top"
-                    app:fontFamily="sans-serif-thin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/configt" />
-                <NumberPicker android:id="@+id/numberpicker"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"  />
+                    android:text="@string/configt"
+                    android:visibility="invisible"
+                    app:fontFamily="sans-serif-thin" />
+
+                <NumberPicker
+                    android:id="@+id/numberpicker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="invisible" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

@@ -13,6 +13,7 @@
     <string name="tornar">Anar al joc</string>
     <string name="total">"total"</string>
     <string name="sizekey">"size"</string>
+    <string name="nomerror">"Ha d'introduir un nom d'usuari"</string>
     <string name="stablishedkey">"stablishedkey"</string>
     <string name="alias">Alias Identificatiu</string>
     <string name="midagraella">Mida graella seleccionada: 7</string>
