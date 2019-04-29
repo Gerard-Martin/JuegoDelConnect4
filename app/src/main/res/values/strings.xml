@@ -36,4 +36,5 @@
     <string name="guanyat">Has Guanyat!</string>
     <string name="perdut">Has Perdut!</string>
     <string name="timespend">Has esgotat el temps!</string>
+    <string name="timekey">"time"</string>
 </resources>

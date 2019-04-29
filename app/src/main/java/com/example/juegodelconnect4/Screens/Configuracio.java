@@ -17,8 +17,8 @@ import com.example.juegodelconnect4.R;
 
 public class Configuracio extends AppCompatActivity {
     public int size = 7;
-    //public String alias;
-    //public boolean timer;
+    public String alias;
+    public boolean timer;
     int selected = 25;
 
 
@@ -42,7 +42,7 @@ public class Configuracio extends AppCompatActivity {
             Intent in = new Intent(this, Resultat.class);
             in.putExtra(getResources().getString(R.string.alias), aliasc.getText().toString());
             in.putExtra(getResources().getString(R.string.sizekey), size);
-            in.putExtra(getResources().getString(R.string.timerkey), time.isChecked());
+            in.putExtra(getResources().getString(R.string.timekey), time.isChecked());
             in.putExtra(getResources().getString(R.string.timespend), selected);
             startActivity(in);
             finish();
@@ -64,12 +64,10 @@ public class Configuracio extends AppCompatActivity {
             }
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-                ;
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                ;
             }
 
         });
