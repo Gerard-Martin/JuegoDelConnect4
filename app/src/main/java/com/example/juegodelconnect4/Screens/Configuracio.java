@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.juegodelconnect4.Logica.Game;
 import com.example.juegodelconnect4.R;
 
 public class Configuracio extends AppCompatActivity {
@@ -39,7 +40,7 @@ public class Configuracio extends AppCompatActivity {
         if(TextUtils.isEmpty(aliasc.getText().toString())){
             aliasc.setError(getResources().getString(R.string.nomerror));
         }else {
-            Intent in = new Intent(this, Resultat.class);
+            Intent in = new Intent(this, Game.class);
             in.putExtra(getResources().getString(R.string.alias), aliasc.getText().toString());
             in.putExtra(getResources().getString(R.string.sizekey), size);
             in.putExtra(getResources().getString(R.string.timekey), time.isChecked());
