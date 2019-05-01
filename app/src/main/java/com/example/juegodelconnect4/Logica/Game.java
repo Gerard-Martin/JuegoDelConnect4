@@ -31,4 +31,13 @@ public class Game extends AppCompatActivity {
         table.notifyDataSetChanged();
         gridview.setAdapter(table);
     }
+
+   /* // state members related with time
+    public Game(int size, int toWin) { . . . }
+    //  getters and setters
+    Position playOpponent () { . . . }
+    void toggleTurn() { . . . }
+    void manageTime() { . . . }
+    boolean checkForFinish () {}
+    ??? drop(int col)*/
 }

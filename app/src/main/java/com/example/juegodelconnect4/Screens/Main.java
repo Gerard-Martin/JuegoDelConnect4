@@ -18,9 +18,6 @@ public class Main extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*Button start = findViewById(R.id.comencar);
-        Button help = findViewById(R.id.ajuda);
-        Button exit = findViewById(R.id.sortir);*/
     }
 
     public void comencar(View view) {

@@ -1,7 +1,7 @@
 package com.example.juegodelconnect4.Logica;
 
-public class Position {
-/*
+public class Position{
+
     public final int row;
     public final int column;
 
@@ -22,14 +22,13 @@ public class Position {
         return new Position(direction.getChangeInRow()+this.row, direction.getChangeInColumn()+this.column);
     }
 
-    boolean isEqualTo(Position other) {
-        return false;
-    }
+   // boolean isEqualTo(Position other) {
+
+   // }
 
     static int pathLength(Position pos1, Position pos2) {
         // pos1 and pos2 are aligned horizontally, vertically or diagonally???
         return 0;
     }
-*/
 
 }

@@ -47,7 +47,7 @@ public class Table extends BaseAdapter {
             token.setLayoutParams(new GridView.LayoutParams(parent.getWidth() / board.length, parent.getWidth() / board.length));
             token.setScaleType(ImageView.ScaleType.FIT_CENTER);
             token.setScaleType(ImageButton.ScaleType.FIT_XY);
-            token.setBackgroundColor(R.color.colorBoard);
+            token.setBackgroundColor(context.getColor(R.color.colorBoard));
             token.setPadding(30, 30, 30, 30);
         } else {
             token = (ImageButton) convertView;
