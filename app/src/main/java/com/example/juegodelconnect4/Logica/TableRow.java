@@ -7,17 +7,16 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.juegodelconnect4.R;
 
-public class Table extends BaseAdapter {
+public class TableRow extends BaseAdapter {
     private Context context;
     final Cell[][] board;
     private Game game;
     boolean last = true;
 
-    Table(Context context, Cell[][] board, Game game) {
+    TableRow(Context context, Cell[][] board, Game game) {
         this.context = context;
         this.board = board;
         this.game = game;
@@ -35,7 +34,7 @@ public class Table extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return board.length*board.length;
+        return board.length;
     }
 
     @Override
@@ -47,22 +46,15 @@ public class Table extends BaseAdapter {
             token.setLayoutParams(new GridView.LayoutParams(parent.getWidth() / board.length, parent.getWidth() / board.length));
             token.setScaleType(ImageView.ScaleType.FIT_CENTER);
             token.setScaleType(ImageButton.ScaleType.FIT_XY);
-            token.setBackgroundColor(context.getColor(R.color.colorBoard));
+            token.setBackgroundColor(context.getColor(R.color.transparent));
             token.setPadding(15, 15, 15, 15);
         } else {
             token = (ImageButton) convertView;
         }
 
         final int row = position / this.board.length;
-        final int column = position % this.board.length;
 
-        if (this.board[column][row].isYellow()){
-            token.setImageResource(R.drawable.y);
-        } else if (this.board[column][row].isRed()){
-            token.setImageResource(R.drawable.r);
-        }else{
-            token.setImageResource(R.drawable.w);
-        }
+        token.setImageResource(R.drawable.r);
         token.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

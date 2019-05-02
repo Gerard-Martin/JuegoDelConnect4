@@ -12,8 +12,9 @@ public class Game extends AppCompatActivity {
     private Status status;
     private boolean hasWinner;
     private Player turn;*/
-    public GridView gridview;
+    public GridView gridview, choose;
     public Table table;
+    public TableRow tableRow;
     public Board board;
 
     @Override
@@ -30,6 +31,11 @@ public class Game extends AppCompatActivity {
         table = new Table(this, (board.cells), this);
         table.notifyDataSetChanged();
         gridview.setAdapter(table);
+        choose = findViewById(R.id.choose);
+        choose.setNumColumns(board.size);
+        tableRow = new TableRow(this, (board.cells), this);
+        tableRow.notifyDataSetChanged();
+        choose.setAdapter(tableRow);
     }
 
    /* // state members related with time

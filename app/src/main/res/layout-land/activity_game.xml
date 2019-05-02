@@ -2,19 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp">
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         android:layout_weight="1"
         android:gravity="top"
-        android:orientation="horizontal">
+        android:orientation="vertical">
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:gravity="start"
             android:layout_weight="1"
             android:orientation="horizontal">
@@ -33,9 +33,9 @@
             app:srcCompat="@drawable/r"/>
         </LinearLayout>
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="end"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:gravity="bottom"
             android:layout_weight="1"
             android:orientation="horizontal">
         <ImageView
@@ -55,18 +55,16 @@
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:orientation="vertical"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
         android:gravity="bottom"
-        android:layout_marginBottom="@dimen/mupm"
         android:layout_weight="5">
         <GridView
             android:id="@+id/choose"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
             android:stretchMode="columnWidth"/>
         <GridView
             android:id="@+id/gridView"
