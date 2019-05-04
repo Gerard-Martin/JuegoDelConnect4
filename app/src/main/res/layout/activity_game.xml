@@ -46,12 +46,11 @@
             android:layout_marginStart="@dimen/mup"
             app:srcCompat="@drawable/timer"/>
         <TextView
-            android:id="@+id/temporit"
+            android:id="@+id/timertext"
             android:layout_width="wrap_content"
             android:textSize="22dp"
             android:layout_marginStart="@dimen/mup"
-            android:layout_height="wrap_content"
-            android:text="@string/tformat" />
+            android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -62,7 +61,7 @@
         android:layout_marginBottom="@dimen/mupm"
         android:layout_weight="5">
         <GridView
-            android:id="@+id/choose"
+            android:id="@+id/buttongrid"
             android:layout_marginBottom="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

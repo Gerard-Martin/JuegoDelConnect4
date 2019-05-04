@@ -13,14 +13,18 @@ import com.example.juegodelconnect4.R;
 
 public class Table extends BaseAdapter {
     private Context context;
-    final Cell[][] board;
+    private Board board;
+    //final Cell[][] board;
     private Game game;
     boolean last = true;
 
-    Table(Context context, Cell[][] board, Game game) {
+    private int size;
+
+    Table(Context context, Board board/*, Game game*/) {
         this.context = context;
         this.board = board;
-        this.game = game;
+        //this.game = game;
+        this.size = board.getSize();
     }
 
     @Override
@@ -35,7 +39,7 @@ public class Table extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return board.length*board.length;
+        return size*size;
     }
 
     @Override
@@ -44,7 +48,7 @@ public class Table extends BaseAdapter {
         if (convertView == null
         ) {
             token = new ImageButton(context);
-            token.setLayoutParams(new GridView.LayoutParams(parent.getWidth() / board.length, parent.getWidth() / board.length));
+            token.setLayoutParams(new GridView.LayoutParams(parent.getWidth() / size, parent.getWidth() / size));
             token.setScaleType(ImageView.ScaleType.FIT_CENTER);
             token.setScaleType(ImageButton.ScaleType.FIT_XY);
             token.setBackgroundColor(context.getColor(R.color.colorBoard));
@@ -53,12 +57,12 @@ public class Table extends BaseAdapter {
             token = (ImageButton) convertView;
         }
 
-        final int row = position / this.board.length;
-        final int column = position % this.board.length;
+        final int row = position / this.size;
+        final int column = position % this.size;
 
-        if (this.board[column][row].isYellow()){
-            token.setImageResource(R.drawable.y);
-        } else if (this.board[column][row].isRed()){
+        if (board.isYellowCell(new Position(row, column))){
+            token.setImageResource(R.drawable.y );
+        } else if (this.board.isRedCell(new Position(row, column))){
             token.setImageResource(R.drawable.r);
         }else{
             token.setImageResource(R.drawable.w);

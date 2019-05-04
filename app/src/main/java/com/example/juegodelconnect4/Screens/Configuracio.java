@@ -18,8 +18,8 @@ import com.example.juegodelconnect4.R;
 
 public class Configuracio extends AppCompatActivity {
     public int size = 7;
-    public String alias;
-    public boolean timer;
+    //public String alias;
+    //public boolean timer;
     int selected = 25;
 
 
@@ -35,7 +35,7 @@ public class Configuracio extends AppCompatActivity {
 
     public void comencar(View view) {
         EditText aliasc = findViewById(R.id.aliasc);
-        SeekBar grid = findViewById(R.id.sb);
+        //SeekBar grid = findViewById(R.id.sb);
         CheckBox time = findViewById(R.id.checkBox);
         if(TextUtils.isEmpty(aliasc.getText().toString())){
             aliasc.setError(getResources().getString(R.string.nomerror));
