@@ -12,6 +12,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
+import android.widget.Button;
 
 import com.example.juegodelconnect4.Logica.Game;
 import com.example.juegodelconnect4.R;
@@ -27,6 +28,14 @@ public class Configuracio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracio);
+
+        Button start = (Button) findViewById(R.id.comencar);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                comencar(v);
+            }
+        });
         seekBar();
         checkBox();
         picker();

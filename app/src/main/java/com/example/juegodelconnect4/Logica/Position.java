@@ -1,5 +1,9 @@
 package com.example.juegodelconnect4.Logica;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.max;
+import static java.lang.Math.sqrt;
+
 public class Position{
 
     private final int row;
@@ -23,21 +27,25 @@ public class Position{
     }
 
    boolean isEqualTo(Position other) {
-       return this.getRow() == other.getRow() &&
+       return other != null &&
+               this.getRow() == other.getRow() &&
                this.getColumn() == other.getColumn();
    }
     static int pathLength(Position pos1, Position pos2) {
-        // pos1 and pos2 are aligned horizontally, vertically or diagonally???
-        int length = 0;
+        int x = abs(pos1.getRow() - pos2.getRow());
+        int y = abs(pos1.getColumn() - pos2.getColumn());
         // pos1 and pos2 are aligned horizontally, vertically or diagonally???
         if(pos1.getRow() == pos2.getRow()){
             // mateixa fila
+            return y + 1;
         }else if(pos1.getColumn() == pos2.getColumn()){
             // mateixa columna
-        }else if (Math.abs(pos1.getRow() - pos2.getRow()) == Math.abs(pos1.getColumn() - pos2.getColumn())){
+            return x + 1;
+        }else if (abs(pos1.getRow() - pos2.getRow()) == abs(pos1.getColumn() - pos2.getColumn())){
             // en diagonal
+            return max(x, y) +1;
         }
-        return length;
+        return 0;
     }
 
 }

@@ -56,13 +56,48 @@ public class Board {
         return cells[position.getRow()][position.getColumn()].isYellow();
 
     }
-/*
-    Position occupyCell (int column, Player player) {
+
+    /*Position occupyCell (int column, Player player) {
+    }*/
+    Position occupyCell (int column, State player) {
+        Position pos = new Position(firstEmptyRow(column), column);
+        if(player == State.RED) cells[pos.getRow()][pos.getColumn()].setRed();
+        else cells[pos.getRow()][pos.getColumn()].setYellow();
+        return pos;
     }
-    boolean hasValidMoves() { //Todo:}
+
+    boolean hasValidMoves() {
+        for(int i = 0 ; i < size ; i += 1){
+            for(int j = 0; j < size ; j += 1){
+                if(cells[j][i].isEmpty()) return true;
+            }
+        }
+        return false;
+    }
+
     int firstEmptyRow(int column) {
         // Assume column is playable ...
+        for(int i = size-1 ; i >= 0 ; i -= 1){
+            if(cells[i][column].isEmpty()) return i;
+        }
+        return -1;
     }
-    int maxConnected(Position position) { //Todo:}
+
+    int maxConnected(Position position){
+        char state = cells[position.getRow()][position.getColumn()].getState();
+        char newState;
+        int maxConnected, connected;
+        maxConnected = 0;
+        for (Direction d: Direction.ALL){
+            do{
+                connected = 0;
+                Position moved = position.move(d);
+                newState = cells[moved.getRow()][moved.getColumn()].getState();
+                if(newState == state) connected += 1;
+            }while(newState == state);
+            maxConnected = Math.max(maxConnected, connected);
+        }
+        return maxConnected;
+    }
     // obtains the maximum number of connected positions in any direction }*/
 }

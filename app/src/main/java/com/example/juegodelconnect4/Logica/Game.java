@@ -12,10 +12,12 @@ import com.example.juegodelconnect4.R;
 import com.example.juegodelconnect4.Screens.Resultat;
 
 public class Game extends AppCompatActivity {
-    public GridView gridview, buttongrid;
-    public Table table;
-    public TableRow tableRow;
-    public Board board;
+    private State state = State.RED;
+
+    private GridView gridview, buttongrid;
+    private Table table;
+    private TableRow tableRow;
+    private Board board;
 
     boolean time;
     int selectedtime;
@@ -46,6 +48,8 @@ public class Game extends AppCompatActivity {
     }
 
     public void init(){
+        this.state = State.RED;
+
         board = new Board(boardSize);
         gridview.setNumColumns(boardSize);
         buttongrid.setNumColumns(boardSize);
@@ -66,6 +70,7 @@ public class Game extends AppCompatActivity {
                 selectedtime-=1;
                 if(selectedtime >= 0)
                 mHandler.postDelayed(this, 1000);
+                else ;
             }
         };
         try{

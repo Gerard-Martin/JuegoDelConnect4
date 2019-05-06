@@ -44,7 +44,29 @@ public class Table extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final ImageButton token;
+        ImageView token;
+        if (convertView == null
+        ) {
+            token = new ImageView(context);
+            token.setLayoutParams(new GridView.LayoutParams(parent.getWidth() / size, parent.getWidth() / size));
+            token.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            token.setScaleType(ImageButton.ScaleType.FIT_XY);
+            token.setBackgroundColor(context.getColor(R.color.colorBoard));
+            token.setPadding(15, 15, 15, 15);
+        } else {
+            token = (ImageView) convertView;
+        }
+        final int row = position / this.size;
+        final int column = position % this.size;
+
+        if (board.isYellowCell(new Position(row, column))){
+            token.setImageResource(R.drawable.y );
+        } else if (this.board.isRedCell(new Position(row, column))){
+            token.setImageResource(R.drawable.r);
+        }else{
+            token.setImageResource(R.drawable.w);
+        }
+        /*final ImageButton token;
         if (convertView == null
         ) {
             token = new ImageButton(context);
@@ -74,7 +96,7 @@ public class Table extends BaseAdapter {
                 else  token.setImageResource(R.drawable.r);
                 last = !last;
             }
-        });
+        });*/
         //final Position p = new Position(column,row);
        /* token.setOnClickListener(new View.OnClickListener() {
             @Override

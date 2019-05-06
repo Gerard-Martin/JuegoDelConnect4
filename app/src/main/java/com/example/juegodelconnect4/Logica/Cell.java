@@ -9,9 +9,10 @@ public class Cell implements Parcelable {
 
     private static final char RED = 'R';
     private static final char YELLOW = 'Y';
-    private static final char EMPTY = '·';
+    private static final char EMPTY = '.';
 
     private char state;
+    //private State player;
 
     private Cell(char state) {
         this.state = state;
@@ -42,13 +43,25 @@ public class Cell implements Parcelable {
         return this.state==YELLOW;
     }
 
+    char getState(){return this.state;}
+
     void setRed() {
         this.state=RED;
     }
 
     void setYellow() {
         this.state=YELLOW;
+        //this.player = State.YELLOW;
     }
+
+    void setEmpty() {
+        this.state=EMPTY;
+        //this.player = State.EMPTY;
+    }
+
+    /*void setPlayer(State player){
+        if(player != null) this.player = player;
+    }*/
 
     public static final Parcelable.Creator<Cell> CREATOR = new Parcelable.Creator<Cell>() {
         @Override
@@ -68,10 +81,6 @@ public class Cell implements Parcelable {
     }
     public String toString() {
         return String.valueOf(this.state);
-    }
-
-    void setEmpty() {
-        this.state=EMPTY;
     }
 
     @Override
