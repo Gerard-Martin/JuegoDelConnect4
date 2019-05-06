@@ -97,6 +97,15 @@ public class Board {
             }while(newState == state);
             maxConnected = Math.max(maxConnected, connected);
         }
+        /*for (Direction d: Direction.ALL){
+            do{
+                connected = 0;
+                Position moved = position.move(d.invert());
+                newState = cells[moved.getRow()][moved.getColumn()].getState();
+                if(newState == state) connected += 1;
+            }while(newState == state);
+            maxConnected = Math.max(maxConnected, connected);
+        }*/ //S'han de considerar totes les direccions o només les definides a direcció??
         return maxConnected;
     }
     // obtains the maximum number of connected positions in any direction }*/
