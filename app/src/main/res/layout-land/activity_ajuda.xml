@@ -13,7 +13,7 @@
         android:layout_weight="0">
         <TextView
             android:id="@+id/textView"
-            android:textSize="@dimen/tm"
+            android:textSize="@dimen/ts"
             android:layout_marginTop="@dimen/mup"
             android:layout_marginBottom="@dimen/mup"
             app:fontFamily="sans-serif-thin"
