@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.GridView;
 import android.content.Intent;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.juegodelconnect4.R;
@@ -13,6 +14,8 @@ import com.example.juegodelconnect4.Screens.Resultat;
 
 public class Game extends AppCompatActivity {
     private State state = State.RED;
+    private final int toWin = 4;
+    private boolean hasWinner;
 
     private GridView gridview, buttongrid;
     private Table table;
@@ -25,6 +28,7 @@ public class Game extends AppCompatActivity {
 
     private Intent in;
     private TextView timertext;
+    private ImageView tornImage;
 
     private Handler mHandler = new Handler();
 
@@ -42,9 +46,20 @@ public class Game extends AppCompatActivity {
         gridview = (GridView) findViewById(R.id.gridView);
         buttongrid = (GridView) findViewById(R.id.buttongrid);
         timertext = (TextView) findViewById(R.id.timertext);
+        tornImage = (ImageView) findViewById(R.id.ficha);
 
         init();
         time();
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     public void init(){
@@ -83,12 +98,24 @@ public class Game extends AppCompatActivity {
 /*
 **************************Game Logic*************************************
 */
-   /* // state members related with time
-    public Game(int size, int toWin) { . . . }
+    // state members related with time
+    //public Game(int size, int toWin) {  }
     //  getters and setters
-    Position playOpponent () { . . . }
-    void toggleTurn() { . . . }
-    void manageTime() { . . . }
-    boolean checkForFinish () {}
-    ??? drop(int col)*/
+    Position playOpponent() {return new Position(0,0);}
+    void toggleTurn() {
+        if(state == State.RED){
+            this.state = State.YELLOW;
+            tornImage.setImageResource(R.drawable.y);
+        }else{
+            this.state = State.RED;
+            tornImage.setImageResource(R.drawable.r);
+        }
+    }
+    void manageTime() {
+        if(time){
+
+        }
+    }
+    boolean checkForFinish() {return false;}
+    void drop(int col){}
 }

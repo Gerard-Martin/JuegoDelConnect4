@@ -14,6 +14,7 @@ import com.example.juegodelconnect4.R;
 public class Table extends BaseAdapter {
     private Context context;
     private Board board;
+    private TableRow chooseButtons;
     //final Cell[][] board;
     private Game game;
     boolean last = true;
