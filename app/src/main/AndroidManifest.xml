@@ -11,10 +11,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Logica.Game" />
         <activity
-            android:name=".Screens.Resultat"
-            android:label="@string/resultat" />
-        <activity android:name=".Screens.Ajuda" />
-        <activity android:name=".Screens.Configuracio" />
+            android:name=".Screens.Resultat" android:label="@string/resultat" />
+        <activity android:name=".Screens.Ajuda" android:label="@string/ajuda" />
+        <activity android:name=".Screens.Configuracio" android:label="@string/configuracio"/>
         <activity android:name=".Screens.Main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
