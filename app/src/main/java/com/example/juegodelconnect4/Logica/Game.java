@@ -77,6 +77,7 @@ public class Game extends AppCompatActivity {
         gridview.setAdapter(table);
     }
 
+    // state members related with time
     public void time(){
         Runnable timertask = new Runnable() {
             @Override
@@ -99,10 +100,13 @@ public class Game extends AppCompatActivity {
 /*
 **************************Game Logic*************************************
 */
-    // state members related with time
     //public Game(int size, int toWin) {  }
     //  getters and setters
-    Position playOpponent() {return new Position(0,0);}
+    Position playOpponent() {
+        // Controla on farà el següent moviment la CPU, primer serà aleatori i després s'implementara una heurística.
+        return new Position(0,0);
+    }
+
     void toggleTurn() {
         if(state == State.RED){
             this.state = State.YELLOW;
@@ -113,11 +117,13 @@ public class Game extends AppCompatActivity {
         }
     }
     void manageTime() {
+        // Es el primer que es comprovara quan es faci un moviment, si es controla el temps i s'ha excedit, s'acaba la partida.
         if(time){
 
         }
     }
     boolean checkForFinish() {
+        // comprovar hasValidMoves  i max connected al fer un moviment.
         return false;
     }
 
@@ -127,11 +133,15 @@ public class Game extends AppCompatActivity {
             if (occupyPos != null) {
                 toggleTurn();
                 table.notifyDataSetChanged();
+                System.out.println("maxconnectec " + board.maxConnected(occupyPos));
+                if(board.maxConnected(occupyPos) == toWin/*si checkForFInish comencem tot el procés per anar a Resultat*/){
+                    // acabament()
+                    startActivity(new Intent(this, Resultat.class));
+                    finish();
+                }
             } else {
                 Toast.makeText(this, getResources().getString(R.string.fullcol), Toast.LENGTH_SHORT).show();
             }
-            System.out.println("maxconnectec " + board.maxConnected(occupyPos));
-            if(board.maxConnected(occupyPos) == toWin) startActivity(new Intent(this, Resultat.class));
         }
     }
 }

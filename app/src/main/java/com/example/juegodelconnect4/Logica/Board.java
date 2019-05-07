@@ -86,6 +86,9 @@ public class Board {
     }
 
     int maxConnected(Position position){
+
+        //********* No es controlen encara totes les situacions!!! ***********
+
         char state = cells[position.getRow()][position.getColumn()].getState();
         char newState;
         int maxConnected, connected;
