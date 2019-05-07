@@ -14,9 +14,8 @@ import com.example.juegodelconnect4.R;
 public class Table extends BaseAdapter {
     private Context context;
     private Board board;
-    private TableRow chooseButtons;
     //final Cell[][] board;
-    private Game game;
+    //private Game game;
     boolean last = true;
 
     private int size;
@@ -26,6 +25,7 @@ public class Table extends BaseAdapter {
         this.board = board;
         //this.game = game;
         this.size = board.getSize();
+        //chooseButtons = newTable
     }
 
     @Override
@@ -59,10 +59,11 @@ public class Table extends BaseAdapter {
         }
         final int row = position / this.size;
         final int column = position % this.size;
+        final Position pos= new Position(row, column);
 
-        if (board.isYellowCell(new Position(row, column))){
+        if (board.isYellowCell(pos)){
             token.setImageResource(R.drawable.y );
-        } else if (this.board.isRedCell(new Position(row, column))){
+        } else if (this.board.isRedCell(pos)){
             token.setImageResource(R.drawable.r);
         }else{
             token.setImageResource(R.drawable.w);

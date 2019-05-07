@@ -8,6 +8,7 @@ import android.widget.GridView;
 import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.juegodelconnect4.R;
 import com.example.juegodelconnect4.Screens.Resultat;
@@ -70,7 +71,7 @@ public class Game extends AppCompatActivity {
         buttongrid.setNumColumns(boardSize);
         table = new Table(this, board/*, this*/);
         table.notifyDataSetChanged();
-        tableRow = new TableRow(this, board/*, this*/);
+        tableRow = new TableRow(this, board, this);
         tableRow.notifyDataSetChanged();
         buttongrid.setAdapter(tableRow);
         gridview.setAdapter(table);
@@ -80,7 +81,7 @@ public class Game extends AppCompatActivity {
         Runnable timertask = new Runnable() {
             @Override
             public void run() {
-                timertext.setText(String.valueOf(selectedtime) + " secs.");
+                timertext.setText(String.valueOf(selectedtime) + getResources().getString(R.string.tformat));
                 timertext.setTextColor(Color.BLUE);
                 selectedtime-=1;
                 if(selectedtime >= 0)
@@ -116,6 +117,21 @@ public class Game extends AppCompatActivity {
 
         }
     }
-    boolean checkForFinish() {return false;}
-    void drop(int col){}
+    boolean checkForFinish() {
+        return false;
+    }
+
+    void drop(int col){
+        if(board.hasValidMoves()) {
+            Position occupyPos = board.occupyCell(col, state);
+            if (occupyPos != null) {
+                toggleTurn();
+                table.notifyDataSetChanged();
+            } else {
+                Toast.makeText(this, getResources().getString(R.string.fullcol), Toast.LENGTH_SHORT).show();
+            }
+            System.out.println("maxconnectec " + board.maxConnected(occupyPos));
+            if(board.maxConnected(occupyPos) == toWin) startActivity(new Intent(this, Resultat.class));
+        }
+    }
 }

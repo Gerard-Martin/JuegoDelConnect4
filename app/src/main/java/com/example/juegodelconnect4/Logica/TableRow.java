@@ -14,11 +14,13 @@ import com.example.juegodelconnect4.R;
 public class TableRow extends BaseAdapter {
     private Context context;
     private Board board;
+    private Game game;
     private int size;
 
-    public TableRow(Context cont, Board board){
+    public TableRow(Context cont, Board board, Game game){
         this.context = cont;
         this.board = board;
+        this.game = game;
         this.size = board.getSize();
     }
 
@@ -59,7 +61,8 @@ public class TableRow extends BaseAdapter {
             @Override
             public void onClick(View v)
             {
-                Toast.makeText(v.getContext(), "Button #" + (position + 1), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(v.getContext(), "Button #" + (position + 1), Toast.LENGTH_SHORT).show();
+                game.drop(position);
             }
         });
 
