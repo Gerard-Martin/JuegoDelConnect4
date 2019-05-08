@@ -10,4 +10,5 @@
     <dimen name="tsm">12sp</dimen>
     <dimen name="tssm">10sp</dimen>
     <dimen name="toast">30dp</dimen>
+    <dimen name="mbg">20dp</dimen>
 </resources>

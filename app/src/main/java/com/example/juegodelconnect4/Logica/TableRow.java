@@ -47,7 +47,7 @@ public class TableRow extends BaseAdapter {
         if (convertView == null) {
             btn = new ImageButton(context);
             //btn.setText("Button " + (++btn_id));
-            btn.setLayoutParams(new GridView.LayoutParams(parent.getWidth() / this.size, parent.getWidth() / this.size));
+            btn.setLayoutParams(new GridView.LayoutParams(boardSize / this.size, boardSize / this.size));
             btn.setScaleType(ImageView.ScaleType.FIT_CENTER);
             btn.setScaleType(ImageButton.ScaleType.FIT_XY);
             btn.setBackgroundColor(context.getColor(R.color.transparent));
