@@ -16,9 +16,6 @@ import android.view.ViewTreeObserver;
 import com.example.juegodelconnect4.R;
 import com.example.juegodelconnect4.Screens.Resultat;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class Game extends AppCompatActivity {
     private State state = State.RED;
     private final int toWin = 4;
