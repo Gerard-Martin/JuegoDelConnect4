@@ -22,6 +22,7 @@ public class Resultat extends AppCompatActivity {
     private String fin;
     private String logc;
 
+    private Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,12 @@ public class Resultat extends AppCompatActivity {
         EditText ti = findViewById(R.id.da);
 
         Intent in = getIntent();
-        fin = in.getStringExtra(getResources().getString(R.string.fin));
-        alias = in.getStringExtra(getResources().getString(R.string.alias));
-        total = in.getIntExtra(getResources().getString(R.string.total), 0);
-        size = in.getIntExtra(getResources().getString(R.string.sizekey), 0);
+        extras = in.getBundleExtra(getResources().getString(R.string.extrasbundle));
+
+        fin = extras.getString(getResources().getString(R.string.fin));
+        alias = extras.getString(getResources().getString(R.string.alias));
+        total = extras.getInt(getResources().getString(R.string.total), 0);
+        size = extras.getInt(getResources().getString(R.string.sizekey), 0);
 
         date = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
         ti.setText(date);
@@ -67,6 +70,7 @@ public class Resultat extends AppCompatActivity {
         EditText log;
         log = findViewById(R.id.vall);
         if(fin.equals(getResources().getString(R.string.emt))){
+            logc = String.format(getResources().getString(R.string.base), alias, size, total)+'\n';
             logc += getResources().getString(R.string.emt);
         }else{
             logc = String.format(getResources().getString(R.string.base), alias, size, total)+'\n';

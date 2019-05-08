@@ -18,10 +18,10 @@ import com.example.juegodelconnect4.Logica.Game;
 import com.example.juegodelconnect4.R;
 
 public class Configuracio extends AppCompatActivity {
-    public int size = 7;
+    private int size = 7;
     //public String alias;
     //public boolean timer;
-    int selected = 25;
+    private int selected = 25;
 
 
     @Override
@@ -49,11 +49,13 @@ public class Configuracio extends AppCompatActivity {
         if(TextUtils.isEmpty(aliasc.getText().toString())){
             aliasc.setError(getResources().getString(R.string.nomerror));
         }else {
+            Bundle extras = new Bundle();
             Intent in = new Intent(this, Game.class);
-            in.putExtra(getResources().getString(R.string.alias), aliasc.getText().toString());
-            in.putExtra(getResources().getString(R.string.sizekey), size);
-            in.putExtra(getResources().getString(R.string.timekey), time.isChecked());
-            in.putExtra(getResources().getString(R.string.timespend), selected);
+            extras.putString(getResources().getString(R.string.alias), aliasc.getText().toString());
+            extras.putInt(getResources().getString(R.string.sizekey), size);
+            extras.putBoolean(getResources().getString(R.string.timekey), time.isChecked());
+            extras.putInt(getResources().getString(R.string.timespend), selected);
+            in.putExtra(getResources().getString(R.string.extrasbundle), extras);
             startActivity(in);
             finish();
         }

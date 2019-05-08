@@ -40,4 +40,5 @@
     <string name="torn">"Torn:"</string>
     <string name="tformat"> secs.</string>
     <string name="fullcol">Columna plena</string>
+    <string name="extrasbundle">Extras Bundle</string>
 </resources>

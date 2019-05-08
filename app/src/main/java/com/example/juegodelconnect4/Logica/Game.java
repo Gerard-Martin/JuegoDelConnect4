@@ -32,6 +32,7 @@ public class Game extends AppCompatActivity {
     int boardSize;
 
     private Intent in;
+    private Bundle extras;
     private TextView timertext;
     private ImageView tornImage;
 
@@ -44,10 +45,11 @@ public class Game extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         in = getIntent();
+        extras = in.getBundleExtra(getResources().getString(R.string.extrasbundle));
 
-        time = in.getBooleanExtra(getResources().getString(R.string.timekey), false);
-        boardSize = in.getIntExtra(getResources().getString(R.string.sizekey), 7);
-        selectedtime = in.getIntExtra(getResources().getString(R.string.timespend), 25);
+        time = extras.getBoolean(getResources().getString(R.string.timekey), false);
+        boardSize = extras.getInt(getResources().getString(R.string.sizekey), 7);
+        selectedtime = extras.getInt(getResources().getString(R.string.timespend), 25);
 
         gridview = (GridView) findViewById(R.id.gridView);
         buttongrid = (GridView) findViewById(R.id.buttongrid);
@@ -110,12 +112,11 @@ public class Game extends AppCompatActivity {
         timertask = new Runnable() {
             @Override
             public void run() {
-                timertext.setText(String.valueOf(selectedtime) + getResources().getString(R.string.tformat));
+                if(selectedtime >= 0) timertext.setText(String.valueOf(selectedtime) + getResources().getString(R.string.tformat));
                 timertext.setTextColor(Color.BLUE);
                 selectedtime-=1;
-                if(selectedtime >= 0)
+                //if(selectedtime == 0) mHandler. ;
                 mHandler.postDelayed(this, 1000);
-                else ;
             }
         };
         try{
@@ -132,13 +133,15 @@ public class Game extends AppCompatActivity {
     //  getters and setters
     Position playOpponent() {
         // Controla on farà el següent moviment la CPU, primer serà aleatori i després s'implementara una heurística.
-        return new Position(0,0);
+        //toggleTurn(); // Desactivat de moment
+        return null;
     }
 
     void toggleTurn() {
         if(state == State.RED){
             this.state = State.YELLOW;
             tornImage.setImageResource(R.drawable.y);
+            playOpponent();
         }else{
             this.state = State.RED;
             tornImage.setImageResource(R.drawable.r);
@@ -147,30 +150,44 @@ public class Game extends AppCompatActivity {
     void manageTime() {
         // Es el primer que es comprovara quan es faci un moviment, si es controla el temps i s'ha excedit, s'acaba la partida.
         if(time){
-
+            // Gestionar-ho d'alguna forma amb el handler
         }
     }
-    boolean checkForFinish() {
+    boolean checkForFinish(Position pos) {
         // comprovar hasValidMoves  i max connected al fer un moviment.
-        return false;
+        return !board.hasValidMoves() || board.maxConnected(pos) == this.toWin;
     }
 
     void drop(int col){
-        if(board.hasValidMoves()) {
-            Position occupyPos = board.occupyCell(col, state);
-            if (occupyPos != null) {
-                toggleTurn();
-                table.notifyDataSetChanged();
-                System.out.println("maxconnectec " + board.maxConnected(occupyPos));
-                if(board.maxConnected(occupyPos) == toWin/*si checkForFInish comencem tot el procés per anar a Resultat*/){
-                    // acabament()
-                    startActivity(new Intent(this, Resultat.class));
-                    mHandler.removeCallbacks(timertask);
-                    finish();
-                }
-            } else {
-                Toast.makeText(this, getResources().getString(R.string.fullcol), Toast.LENGTH_SHORT).show();
-            }
+
+        Position occupyPos = board.occupyCell(col, state);
+        if (occupyPos != null) {
+            table.notifyDataSetChanged();
+            //System.out.println("maxconnectec " + board.maxConnected(occupyPos));
+            if(checkForFinish(occupyPos))//si checkForFInish comencem tot el procés per anar a Resultat
+                finalPartida(occupyPos);
+            toggleTurn();
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.fullcol), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void finalPartida(Position pos){
+        if(board.maxConnected(pos) == toWin){
+            if(state == State.RED) extras.putString(getResources().getString(R.string.fin),
+                    getResources().getString(R.string.guanyat));
+            else extras.putString(getResources().getString(R.string.fin),
+                    getResources().getString(R.string.perdut));
+        }else extras.putString(getResources().getString(R.string.fin),
+                getResources().getString(R.string.emt));
+        acabament();
+    }
+
+    private void acabament(){
+        Intent resultat = new Intent(this, Resultat.class);
+        resultat.putExtra(getResources().getString(R.string.extrasbundle), extras);
+        mHandler.removeCallbacks(timertask);
+        startActivity(resultat);
+        finish();
     }
 }
