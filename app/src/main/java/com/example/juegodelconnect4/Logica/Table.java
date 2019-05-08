@@ -15,12 +15,14 @@ public class Table extends BaseAdapter {
     private Context context;
     final Cell[][] board;
     private Game game;
+    private int size;
     boolean last = true;
 
-    Table(Context context, Cell[][] board, Game game) {
+    Table(Context context, Cell[][] board, Game game, int size) {
         this.context = context;
         this.board = board;
         this.game = game;
+        this.size = size;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class Table extends BaseAdapter {
         if (convertView == null
         ) {
             token = new ImageButton(context);
-            token.setLayoutParams(new GridView.LayoutParams(parent.getWidth() / board.length, parent.getWidth() / board.length));
+            token.setLayoutParams(new GridView.LayoutParams(size / board.length, size / board.length));
             token.setScaleType(ImageView.ScaleType.FIT_CENTER);
             token.setScaleType(ImageButton.ScaleType.FIT_XY);
             token.setBackgroundColor(context.getColor(R.color.colorBoard));

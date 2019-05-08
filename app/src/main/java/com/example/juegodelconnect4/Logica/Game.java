@@ -1,9 +1,12 @@
 package com.example.juegodelconnect4.Logica;
 
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ViewTreeObserver;
 import android.widget.GridView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.juegodelconnect4.R;
@@ -19,6 +22,7 @@ public class Game extends AppCompatActivity {
     private Player turn;*/
     public boolean time;
     public String alias;
+    public LinearLayout gl, cl;
     public int size;
     public int total;
     public GridView gridview, choose;
@@ -42,14 +46,31 @@ public class Game extends AppCompatActivity {
         board = new Board(7);
         gridview = findViewById(R.id.gridView);
         gridview.setNumColumns(board.size);
-        table = new Table(this, (board.cells), this);
-        table.notifyDataSetChanged();
-        gridview.setAdapter(table);
         choose = findViewById(R.id.choose);
         choose.setNumColumns(board.size);
-        tableRow = new TableRow(this, (board.cells), this);
-        tableRow.notifyDataSetChanged();
-        choose.setAdapter(tableRow);
+        cl = findViewById(R.id.cl);
+        gl = findViewById(R.id.gl);
+        final Game game = this;
+        ViewTreeObserver vto = gl.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    gl.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                } else {
+                    gl.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+                int width  = gl.getMeasuredWidth();
+                int height = gl.getMeasuredHeight();
+                size = Math.min(width, height);
+                table = new Table(getApplicationContext(), (board.cells), game, size);
+                table.notifyDataSetChanged();
+                gridview.setAdapter(table);
+                tableRow = new TableRow(getApplicationContext(), (board.cells), game, size);
+                tableRow.notifyDataSetChanged();
+                choose.setAdapter(tableRow);
+            }
+        });
     }
 
     /*public void acabarPartida() {

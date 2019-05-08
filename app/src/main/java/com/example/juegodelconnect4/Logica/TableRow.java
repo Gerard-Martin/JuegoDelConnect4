@@ -13,13 +13,15 @@ import com.example.juegodelconnect4.R;
 public class TableRow extends BaseAdapter {
     private Context context;
     final Cell[][] board;
+    private int size;
     private Game game;
     boolean last = true;
 
-    TableRow(Context context, Cell[][] board, Game game) {
+    TableRow(Context context, Cell[][] board, Game game, int size) {
         this.context = context;
         this.board = board;
         this.game = game;
+        this.size = size;
     }
 
     @Override
@@ -43,7 +45,7 @@ public class TableRow extends BaseAdapter {
         if (convertView == null
         ) {
             token = new ImageButton(context);
-            token.setLayoutParams(new GridView.LayoutParams(parent.getWidth() / board.length, parent.getWidth() / board.length));
+            token.setLayoutParams(new GridView.LayoutParams(size / board.length, size / board.length));
             token.setScaleType(ImageView.ScaleType.FIT_CENTER);
             token.setScaleType(ImageButton.ScaleType.FIT_XY);
             token.setBackgroundColor(context.getColor(R.color.transparent));
@@ -51,6 +53,7 @@ public class TableRow extends BaseAdapter {
         } else {
             token = (ImageButton) convertView;
         }
+
 
         final int row = position / this.board.length;
 

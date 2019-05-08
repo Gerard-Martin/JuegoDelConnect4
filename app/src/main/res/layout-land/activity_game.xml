@@ -18,19 +18,19 @@
             android:gravity="start"
             android:layout_weight="1"
             android:orientation="horizontal">
-        <TextView
-            android:id="@+id/t"
-            android:layout_width="wrap_content"
-            android:textSize="22dp"
-            android:layout_height="wrap_content"
-            android:text="@string/torn" />
-        <ImageView
-            android:id="@+id/ficha"
-            android:layout_height="30dp"
-            android:layout_width="30dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/mup"
-            app:srcCompat="@drawable/r"/>
+            <TextView
+                android:id="@+id/t"
+                android:layout_width="wrap_content"
+                android:textSize="22dp"
+                android:layout_height="wrap_content"
+                android:text="@string/torn" />
+            <ImageView
+                android:id="@+id/ficha"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/mup"
+                app:srcCompat="@drawable/r"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,41 +38,61 @@
             android:gravity="bottom"
             android:layout_weight="1"
             android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/temps"
-            android:layout_height="30dp"
-            android:layout_width="30dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/mup"
-            android:layout_marginBottom="25dp"
-            app:srcCompat="@drawable/timer"/>
-        <TextView
-            android:id="@+id/temporit"
-            android:layout_width="wrap_content"
-            android:textSize="22dp"
-            android:layout_marginStart="@dimen/mup"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="7dp"
-            android:text="@string/tformat" />
+            <ImageView
+                android:id="@+id/temps"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/mup"
+                app:srcCompat="@drawable/timer"/>
+            <TextView
+                android:id="@+id/temporit"
+                android:layout_width="wrap_content"
+                android:textSize="22dp"
+                android:layout_marginStart="@dimen/mup"
+                android:layout_height="wrap_content"
+                android:text="@string/tformat" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="0dp"
         android:orientation="vertical"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_height="match_parent"
         android:gravity="bottom"
-        android:layout_weight="5">
+        android:layout_weight="2">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:id="@+id/cl"
+            android:gravity="bottom"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dp"
+            android:layout_weight="1.2">
         <GridView
             android:id="@+id/choose"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchMode="columnWidth"/>
-        <GridView
-            android:id="@+id/gridView"
-            android:columnWidth="90dp"
+            android:horizontalSpacing="-220dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:stretchMode="columnWidth"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="bottom"
+            android:layout_gravity="center_horizontal"
+            android:layout_height="0dp"
+            android:id="@+id/gl"
+            android:layout_weight="8">
+        <GridView
+            android:id="@+id/gridView"
+            android:layout_width="match_parent"
+            android:horizontalSpacing="-220dp"
+            android:layout_height="wrap_content"
+            android:stretchMode="columnWidth"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
