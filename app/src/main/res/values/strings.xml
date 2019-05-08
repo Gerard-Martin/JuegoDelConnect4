@@ -32,6 +32,9 @@
     <string name="correu">"exemple@exemple.com"</string>
     <string name="nova">Nova Partida</string>
     <string name="emt">"Heu empatat!"</string>
+    <string name="cpuguanyat">"Vosté ha perdut!"</string>
+    <string name="jugadorguanyat">"Vosté ha guanyat!"</string>
+    <string name="tt">"S'ha esgotat el temps!"</string>
     <string name="base">Alias: %s \n Mida Graella: %d Temps total: %d secs.</string>
     <string name="guanyat">Has Guanyat!</string>
     <string name="perdut">Has Perdut!</string>
@@ -41,4 +44,6 @@
     <string name="tformat"> secs.</string>
     <string name="fullcol">Columna plena</string>
     <string name="extrasbundle">Extras Bundle</string>
+    <string name="temps" formatted="false">Temps restant: %d segons</string>
+    <string name="tempsinici" formatted="false">Temps des del inici: %d segons</string>
 </resources>

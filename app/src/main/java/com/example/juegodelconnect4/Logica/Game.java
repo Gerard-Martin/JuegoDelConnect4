@@ -16,6 +16,9 @@ import android.view.ViewTreeObserver;
 import com.example.juegodelconnect4.R;
 import com.example.juegodelconnect4.Screens.Resultat;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Game extends AppCompatActivity {
     private State state = State.RED;
     private final int toWin = 4;
@@ -89,6 +92,7 @@ public class Game extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                  
                     g1.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 } else {
                     g1.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -131,6 +135,7 @@ public class Game extends AppCompatActivity {
 */
     //public Game(int size, int toWin) {  }
     //  getters and setters
+  
     Position playOpponent() {
         // Controla on farà el següent moviment la CPU, primer serà aleatori i després s'implementara una heurística.
         //toggleTurn(); // Desactivat de moment
