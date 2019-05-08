@@ -1,9 +1,11 @@
 package com.example.juegodelconnect4.Logica;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Bundle;
 import android.os.Build;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 import android.content.Intent;
@@ -29,6 +31,7 @@ public class Game extends AppCompatActivity {
 
     boolean time;
     int selectedtime;
+    int expendtime = 0;
     int boardSize;
 
     private Intent in;
@@ -36,7 +39,15 @@ public class Game extends AppCompatActivity {
     private TextView timertext;
     private ImageView tornImage;
 
-    private Handler mHandler = new Handler();
+    @SuppressLint("HandlerLeak")
+    private final Handler mHandler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            if (msg.what == 0){
+                manageTime();
+            }
+        }
+    };
     private Runnable timertask;
 
     @Override
@@ -57,6 +68,9 @@ public class Game extends AppCompatActivity {
         tornImage = (ImageView) findViewById(R.id.ficha);
         c1 = (LinearLayout) findViewById(R.id.c1);
         g1 = (LinearLayout) findViewById(R.id.g1);
+
+        if(time) timertext.setTextColor(Color.RED);
+        else timertext.setTextColor(Color.BLUE);
 
         init();
         time();
@@ -89,7 +103,6 @@ public class Game extends AppCompatActivity {
             @Override
             public void onGlobalLayout() {
                 if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
-                  
                     g1.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 } else {
                     g1.getViewTreeObserver().removeOnGlobalLayoutListener(this);
@@ -114,9 +127,9 @@ public class Game extends AppCompatActivity {
             @Override
             public void run() {
                 if(selectedtime >= 0) timertext.setText(String.valueOf(selectedtime) + getResources().getString(R.string.tformat));
-                timertext.setTextColor(Color.BLUE);
-                selectedtime-=1;
-                //if(selectedtime == 0) mHandler. ;
+                if(selectedtime == 0) mHandler.sendEmptyMessage(0);
+                selectedtime -= 1;
+                expendtime += 1;
                 mHandler.postDelayed(this, 1000);
             }
         };
@@ -153,42 +166,48 @@ public class Game extends AppCompatActivity {
         // Es el primer que es comprovara quan es faci un moviment, si es controla el temps i s'ha excedit, s'acaba la partida.
         if(time){
             // Gestionar-ho d'alguna forma amb el handler
+            extras.putString(getResources().getString(R.string.fin),
+                    getResources().getString(R.string.timespend));
+            acabament();
         }
     }
-    boolean checkForFinish(Position pos) {
+    /*boolean checkForFinish(Position pos) {
         // comprovar hasValidMoves  i max connected al fer un moviment.
         return !board.hasValidMoves() || board.maxConnected(pos) == this.toWin;
-    }
+    }*/
 
     void drop(int col){
-
         Position occupyPos = board.occupyCell(col, state);
         if (occupyPos != null) {
             table.notifyDataSetChanged();
             //System.out.println("maxconnectec " + board.maxConnected(occupyPos));
-            if(checkForFinish(occupyPos))//si checkForFInish comencem tot el procés per anar a Resultat
-                finalPartida(occupyPos);
+            //if(checkForFinish(occupyPos))//si checkForFinish comencem tot el procés per anar a Resultat
+            checkFinalPartida(occupyPos);
             toggleTurn();
         } else {
             Toast.makeText(this, getResources().getString(R.string.fullcol), Toast.LENGTH_SHORT).show();
         }
     }
 
-    private void finalPartida(Position pos){
+    private void checkFinalPartida(Position pos){
         if(board.maxConnected(pos) == toWin){
             if(state == State.RED) extras.putString(getResources().getString(R.string.fin),
                     getResources().getString(R.string.guanyat));
             else extras.putString(getResources().getString(R.string.fin),
                     getResources().getString(R.string.perdut));
-        }else extras.putString(getResources().getString(R.string.fin),
-                getResources().getString(R.string.emt));
-        acabament();
+            acabament();
+        }else if(!board.hasValidMoves()) {
+            extras.putString(getResources().getString(R.string.fin),
+                    getResources().getString(R.string.emt));
+            acabament();
+        }
     }
 
     private void acabament(){
+        mHandler.removeCallbacks(timertask);
+        extras.putInt(getResources().getString(R.string.total), expendtime);
         Intent resultat = new Intent(this, Resultat.class);
         resultat.putExtra(getResources().getString(R.string.extrasbundle), extras);
-        mHandler.removeCallbacks(timertask);
         startActivity(resultat);
         finish();
     }
