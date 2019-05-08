@@ -21,8 +21,8 @@ public class Game extends AppCompatActivity {
     private final int toWin = 4;
     private boolean hasWinner;
 
-    private LinearLayout c1, g1;
     private GridView gridview, buttongrid;
+    private LinearLayout c1, g1;
     private Table table;
     private TableRow tableRow;
     private Board board;
