@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="bottom"
-                android:horizontalSpacing="-220dp"
+                android:horizontalSpacing="@dimen/horz"
                 android:stretchMode="columnWidth" />
         </LinearLayout>
 
@@ -103,7 +103,7 @@
                 android:id="@+id/gridView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:horizontalSpacing="-220dp"
+                android:horizontalSpacing="@dimen/horz"
                 android:stretchMode="columnWidth" />
         </LinearLayout>
     </LinearLayout>
