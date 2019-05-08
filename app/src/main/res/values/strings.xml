@@ -43,6 +43,7 @@
     <string name="torn">"Torn:"</string>
     <string name="tformat"> secs.</string>
     <string name="fullcol">Columna plena</string>
+    <string name="extrasbundle">Extras Bundle</string>
     <string name="temps" formatted="false">Temps restant: %d segons</string>
     <string name="tempsinici" formatted="false">Temps des del inici: %d segons</string>
 </resources>

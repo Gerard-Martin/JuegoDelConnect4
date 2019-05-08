@@ -41,7 +41,7 @@ public class Board {
     }
 
     public int getSize() {
-        return size;
+        return this.size;
     }
 
     public boolean isEmptyCell(Position position) {
@@ -85,46 +85,35 @@ public class Board {
         return -1;
     }
 
+    // obtains the maximum number of connected positions in any direction }
     int maxConnected(Position position){
-
-        //********* No es controlen encara totes les situacions!!! ***********
-
         char state = cells[position.getRow()][position.getColumn()].getState();
         char newState;
         int maxConnected, connected;
         maxConnected = 0;
         for (Direction d: Direction.ALL){
             Position moved = position.move(d);
+            Position invertMoved = position.move(d.invert());
+            connected = 1;
             if(inBoardLimits(moved.getRow(), moved.getColumn())) {
-                connected = 1;
                 do {
                     newState = cells[moved.getRow()][moved.getColumn()].getState();
-                    System.out.println("Normal state " + state + " newState " + newState + moved.getRow() + " " + moved.getColumn());
-                    System.out.println("Connected " + connected);
                     if (newState == state) connected += 1;
                     moved = moved.move(d);
                 } while (newState == state && inBoardLimits(moved.getRow(), moved.getColumn()));
-                maxConnected = Math.max(maxConnected, connected);
             }
-        }
-        for (Direction d: Direction.ALL){
-            Position moved = position.move(d.invert());
-            if(inBoardLimits(moved.getRow(), moved.getColumn())) {
-                connected = 1;
-                //while (newState == state && inBoardLimits(moved.getRow(), moved.getColumn())){
-                do {
-                    newState = cells[moved.getRow()][moved.getColumn()].getState();
-                    System.out.println("Invert state " + state + " newState " + newState + moved.getRow() + " " + moved.getColumn());
+            if(inBoardLimits(invertMoved.getRow(), invertMoved.getColumn())) {
+                do{
+                    newState = cells[invertMoved.getRow()][invertMoved.getColumn()].getState();
                     if (newState == state) connected += 1;
-                    System.out.println("Connected " + connected + d.toString());
-                    moved = moved.move(d.invert());
-                } while (newState == state && inBoardLimits(moved.getRow(), moved.getColumn()));
-                maxConnected = Math.max(maxConnected, connected);
+                    invertMoved = invertMoved.move(d.invert());
+                }while (newState == state && inBoardLimits(invertMoved.getRow(), invertMoved.getColumn()));
             }
-        } //S'han de considerar totes les direccions o només les definides a direcció??
+            maxConnected = Math.max(maxConnected, connected);
+        }
         return maxConnected;
     }
-    // obtains the maximum number of connected positions in any direction }*/
+
     private boolean inBoardLimits(int row, int col){
         return row < size && row >= 0 && col < size && col >= 0;
     }
