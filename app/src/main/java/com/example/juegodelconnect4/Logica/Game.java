@@ -55,8 +55,8 @@ public class Game extends AppCompatActivity {
         buttongrid = (GridView) findViewById(R.id.buttongrid);
         timertext = (TextView) findViewById(R.id.timertext);
         tornImage = (ImageView) findViewById(R.id.ficha);
-        c1 = (LinearLayout) findViewById(R.id.cl);
-        g1 = (LinearLayout) findViewById(R.id.gl);
+        c1 = (LinearLayout) findViewById(R.id.c1);
+        g1 = (LinearLayout) findViewById(R.id.g1);
 
         init();
         time();

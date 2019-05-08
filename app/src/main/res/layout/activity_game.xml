@@ -64,7 +64,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:id="@+id/cl"
+            android:id="@+id/c1"
             android:gravity="bottom"
             android:layout_height="0dp"
             android:layout_marginBottom="15dp"
@@ -80,7 +80,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:id="@+id/gl"
+            android:id="@+id/g1"
             android:layout_height="0dp"
             android:gravity="top"
             android:layout_marginBottom="15dp"
