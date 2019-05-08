@@ -15,13 +15,14 @@ public class TableRow extends BaseAdapter {
     private Context context;
     private Board board;
     private Game game;
-    private int size;
+    private int size, boardSize;
 
-    public TableRow(Context cont, Board board, Game game){
+    public TableRow(Context cont, Board board, Game game, int boardsize){
         this.context = cont;
         this.board = board;
         this.game = game;
         this.size = board.getSize();
+        this.boardSize = boardsize;
     }
 
     @Override

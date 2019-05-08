@@ -18,19 +18,19 @@
             android:gravity="start"
             android:layout_weight="1"
             android:orientation="horizontal">
-        <TextView
-            android:id="@+id/t"
-            android:layout_width="wrap_content"
-            android:textSize="22dp"
-            android:layout_height="wrap_content"
-            android:text="@string/torn" />
-        <ImageView
-            android:id="@+id/ficha"
-            android:layout_height="30dp"
-            android:layout_width="30dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/mup"
-            app:srcCompat="@drawable/r"/>
+            <TextView
+                android:id="@+id/t"
+                android:layout_width="wrap_content"
+                android:textSize="22dp"
+                android:layout_height="wrap_content"
+                android:text="@string/torn" />
+            <ImageView
+                android:id="@+id/ficha"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/mup"
+                app:srcCompat="@drawable/r"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
@@ -38,19 +38,19 @@
             android:gravity="end"
             android:layout_weight="1"
             android:orientation="horizontal">
-        <ImageView
-            android:id="@+id/temps"
-            android:layout_height="30dp"
-            android:layout_width="30dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginStart="@dimen/mup"
-            app:srcCompat="@drawable/timer"/>
-        <TextView
-            android:id="@+id/timertext"
-            android:layout_width="wrap_content"
-            android:textSize="22dp"
-            android:layout_marginStart="@dimen/mup"
-            android:layout_height="wrap_content" />
+            <ImageView
+                android:id="@+id/temps"
+                android:layout_height="30dp"
+                android:layout_width="30dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="@dimen/mup"
+                app:srcCompat="@drawable/timer"/>
+            <TextView
+                android:id="@+id/timertext"
+                android:layout_width="wrap_content"
+                android:textSize="22dp"
+                android:layout_marginStart="@dimen/mup"
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -59,19 +59,36 @@
         android:layout_height="0dp"
         android:gravity="bottom"
         android:layout_marginBottom="@dimen/mupm"
-        android:layout_weight="5">
-        <GridView
-            android:id="@+id/buttongrid"
-            android:layout_marginBottom="10dp"
+        android:layout_weight="12">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:stretchMode="columnWidth"/>
-        <GridView
-            android:id="@+id/gridView"
+            android:orientation="vertical"
+            android:id="@+id/cl"
+            android:gravity="bottom"
+            android:layout_height="0dp"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="2">
+            <GridView
+                android:id="@+id/buttongrid"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:stretchMode="columnWidth"/>
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:stretchMode="columnWidth"/>
+            android:orientation="vertical"
+            android:id="@+id/gl"
+            android:layout_height="0dp"
+            android:gravity="top"
+            android:layout_marginBottom="15dp"
+            android:layout_weight="8">
+            <GridView
+                android:id="@+id/gridView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchMode="columnWidth"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

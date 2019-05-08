@@ -2,13 +2,16 @@ package com.example.juegodelconnect4.Logica;
 
 import android.graphics.Color;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Build;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 import android.content.Intent;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.view.ViewTreeObserver;
 
 import com.example.juegodelconnect4.R;
 import com.example.juegodelconnect4.Screens.Resultat;
@@ -19,6 +22,7 @@ public class Game extends AppCompatActivity {
     private boolean hasWinner;
 
     private GridView gridview, buttongrid;
+    private LinearLayout c1, g1;
     private Table table;
     private TableRow tableRow;
     private Board board;
@@ -32,6 +36,7 @@ public class Game extends AppCompatActivity {
     private ImageView tornImage;
 
     private Handler mHandler = new Handler();
+    private Runnable timertask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +53,14 @@ public class Game extends AppCompatActivity {
         buttongrid = (GridView) findViewById(R.id.buttongrid);
         timertext = (TextView) findViewById(R.id.timertext);
         tornImage = (ImageView) findViewById(R.id.ficha);
+        c1 = (LinearLayout) findViewById(R.id.cl);
+        g1 = (LinearLayout) findViewById(R.id.gl);
 
         init();
         time();
     }
 
-    @Override
+    /*@Override
     public void onRestoreInstanceState(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
     }
@@ -61,7 +68,7 @@ public class Game extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-    }
+    }*/
 
     public void init(){
         this.state = State.RED;
@@ -69,17 +76,38 @@ public class Game extends AppCompatActivity {
         board = new Board(boardSize);
         gridview.setNumColumns(boardSize);
         buttongrid.setNumColumns(boardSize);
-        table = new Table(this, board/*, this*/);
-        table.notifyDataSetChanged();
-        tableRow = new TableRow(this, board, this);
-        tableRow.notifyDataSetChanged();
-        buttongrid.setAdapter(tableRow);
-        gridview.setAdapter(table);
+        //table = new Table(this, board/*, this*/);
+        //table.notifyDataSetChanged();
+        //tableRow = new TableRow(this, board, this);
+        //tableRow.notifyDataSetChanged();
+        //buttongrid.setAdapter(tableRow);
+        //gridview.setAdapter(table);
+        ViewTreeObserver vto = g1.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+                    g1.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                } else {
+                    g1.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                }
+                int width  = g1.getMeasuredWidth();
+                int height = g1.getMeasuredHeight();
+                int boardSize = Math.min(width, height);
+                table = new Table(getApplicationContext(), board, boardSize);
+                table.notifyDataSetChanged();
+                gridview.setAdapter(table);
+                tableRow = new TableRow(getApplicationContext(), board, Game.this, boardSize);
+                tableRow.notifyDataSetChanged();
+                buttongrid.setAdapter(tableRow);
+            }
+        });
+
     }
 
     // state members related with time
     public void time(){
-        Runnable timertask = new Runnable() {
+        timertask = new Runnable() {
             @Override
             public void run() {
                 timertext.setText(String.valueOf(selectedtime) + getResources().getString(R.string.tformat));
@@ -137,6 +165,7 @@ public class Game extends AppCompatActivity {
                 if(board.maxConnected(occupyPos) == toWin/*si checkForFInish comencem tot el procés per anar a Resultat*/){
                     // acabament()
                     startActivity(new Intent(this, Resultat.class));
+                    mHandler.removeCallbacks(timertask);
                     finish();
                 }
             } else {

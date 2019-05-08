@@ -18,12 +18,12 @@ public class Table extends BaseAdapter {
     //private Game game;
     boolean last = true;
 
-    private int size;
+    private int size, boardSize;
 
-    Table(Context context, Board board/*, Game game*/) {
+    Table(Context context, Board board, int boardsize) {
         this.context = context;
         this.board = board;
-        //this.game = game;
+        this.boardSize = boardsize;
         this.size = board.getSize();
         //chooseButtons = newTable
     }
@@ -46,14 +46,14 @@ public class Table extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         ImageView token;
-        if (convertView == null
-        ) {
+        if (convertView == null) {
             token = new ImageView(context);
-            token.setLayoutParams(new GridView.LayoutParams(parent.getWidth() / size, parent.getWidth() / size));
+            token.setLayoutParams(new GridView.LayoutParams(boardSize / size, boardSize / size));
             token.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            token.setScaleType(ImageButton.ScaleType.FIT_XY);
+            //token.setScaleType(ImageButton.ScaleType.FIT_XY);
             token.setBackgroundColor(context.getColor(R.color.colorBoard));
             token.setPadding(15, 15, 15, 15);
+
         } else {
             token = (ImageView) convertView;
         }
