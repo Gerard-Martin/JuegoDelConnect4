@@ -7,21 +7,27 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.juegodelconnect4.R;
 
 public class TableRow extends BaseAdapter {
     private Context context;
-    final Cell[][] board;
-    private int size;
+    private Board board;
     private Game game;
-    boolean last = true;
+    private int size, boardSize;
 
-    TableRow(Context context, Cell[][] board, Game game, int size) {
-        this.context = context;
+    public TableRow(Context cont, Board board, Game game, int boardsize){
+        this.context = cont;
         this.board = board;
         this.game = game;
-        this.size = size;
+        this.size = board.getSize();
+        this.boardSize = boardsize;
+    }
+
+    @Override
+    public int getCount() {
+        return size;
     }
 
     @Override
@@ -35,55 +41,32 @@ public class TableRow extends BaseAdapter {
     }
 
     @Override
-    public int getCount() {
-        return board.length;
-    }
-
-    @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final ImageButton token;
-        if (convertView == null
-        ) {
-            token = new ImageButton(context);
-            token.setLayoutParams(new GridView.LayoutParams(size / board.length, size / board.length));
-            token.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            token.setScaleType(ImageButton.ScaleType.FIT_XY);
-            token.setBackgroundColor(context.getColor(R.color.transparent));
-            token.setPadding(15, 15, 15, 15);
+        ImageButton btn;
+
+        if (convertView == null) {
+            btn = new ImageButton(context);
+            //btn.setText("Button " + (++btn_id));
+            btn.setLayoutParams(new GridView.LayoutParams(boardSize / this.size, boardSize / this.size));
+            btn.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            btn.setScaleType(ImageButton.ScaleType.FIT_XY);
+            btn.setBackgroundColor(context.getColor(R.color.transparent));
+            btn.setPadding(15, 15, 15, 15);
+            btn.setImageResource(R.drawable.r);
         } else {
-            token = (ImageButton) convertView;
+            btn = (ImageButton) convertView;
         }
 
-
-        final int row = position / this.board.length;
-
-        token.setImageResource(R.drawable.r);
-        token.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View v) {
-                if(last) token.setImageResource(R.drawable.y);
-                else  token.setImageResource(R.drawable.r);
-                last = !last;
+            public void onClick(View v)
+            {
+                //Toast.makeText(v.getContext(), "Button #" + (position + 1), Toast.LENGTH_SHORT).show();
+                game.drop(position);
             }
         });
-        //final Position p = new Position(column,row);
-       /* token.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (game.board.isHint(p)) {
-                    game.move(p);
-                    if(game.cpu) game.heuristic();
-                    else if (game.canPlay(game.getOther())) {
-                        game.state = game.getOther();
-                    }
-                    game.setHints();
-                    game.table.notifyDataSetChanged();
-                    game.addBoard(new Board(game.board));
-                } else {
-                    Toast.makeText(context, R.string.posnovalida, Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
-        return token;
+
+        return btn;
     }
 }

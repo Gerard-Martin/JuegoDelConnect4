@@ -44,25 +44,25 @@
             android:layout_weight="1"
             android:paddingRight="16dp" >
 
-            <Button
-                android:id="@+id/com"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="comencar"
-                android:text="@string/comencar" />
+        <Button
+            android:id="@+id/com"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="comencar"
+            android:text="@string/comencar" />
 
-            <Button
-                android:id="@+id/ajuda"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="mostrarAjuda"
-                android:text="@string/ajuda" />
+        <Button
+            android:id="@+id/ajuda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="mostrarAjuda"
+            android:text="@string/ajuda" />
 
-            <Button
-                android:id="@+id/sort"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="sortir"
-                android:text="@string/sortir" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/sort"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="sortir"
+            android:text="@string/sortir" />
     </LinearLayout>
+</LinearLayout>

@@ -41,8 +41,8 @@
     <string name="timespend">Has esgotat el temps!</string>
     <string name="timekey">"time"</string>
     <string name="torn">"Torn:"</string>
-    <string name="tformat">%d secs.</string>
+    <string name="tformat"> secs.</string>
+    <string name="fullcol">Columna plena</string>
     <string name="temps" formatted="false">Temps restant: %d segons</string>
     <string name="tempsinici" formatted="false">Temps des del inici: %d segons</string>
-
 </resources>

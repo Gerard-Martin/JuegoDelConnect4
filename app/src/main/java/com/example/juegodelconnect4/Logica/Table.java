@@ -13,16 +13,19 @@ import com.example.juegodelconnect4.R;
 
 public class Table extends BaseAdapter {
     private Context context;
-    final Cell[][] board;
-    private Game game;
-    private int size;
+    private Board board;
+    //final Cell[][] board;
+    //private Game game;
     boolean last = true;
 
-    Table(Context context, Cell[][] board, Game game, int size) {
+    private int size, boardSize;
+
+    Table(Context context, Board board, int boardsize) {
         this.context = context;
         this.board = board;
-        this.game = game;
-        this.size = size;
+        this.boardSize = boardsize;
+        this.size = board.getSize();
+        //chooseButtons = newTable
     }
 
     @Override
@@ -37,16 +40,39 @@ public class Table extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return board.length*board.length;
+        return size*size;
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        final ImageButton token;
+        ImageView token;
+        if (convertView == null) {
+            token = new ImageView(context);
+            token.setLayoutParams(new GridView.LayoutParams(boardSize / size, boardSize / size));
+            token.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            //token.setScaleType(ImageButton.ScaleType.FIT_XY);
+            token.setBackgroundColor(context.getColor(R.color.colorBoard));
+            token.setPadding(15, 15, 15, 15);
+
+        } else {
+            token = (ImageView) convertView;
+        }
+        final int row = position / this.size;
+        final int column = position % this.size;
+        final Position pos= new Position(row, column);
+
+        if (board.isYellowCell(pos)){
+            token.setImageResource(R.drawable.y );
+        } else if (this.board.isRedCell(pos)){
+            token.setImageResource(R.drawable.r);
+        }else{
+            token.setImageResource(R.drawable.w);
+        }
+        /*final ImageButton token;
         if (convertView == null
         ) {
             token = new ImageButton(context);
-            token.setLayoutParams(new GridView.LayoutParams(size / board.length, size / board.length));
+            token.setLayoutParams(new GridView.LayoutParams(parent.getWidth() / size, parent.getWidth() / size));
             token.setScaleType(ImageView.ScaleType.FIT_CENTER);
             token.setScaleType(ImageButton.ScaleType.FIT_XY);
             token.setBackgroundColor(context.getColor(R.color.colorBoard));
@@ -55,12 +81,12 @@ public class Table extends BaseAdapter {
             token = (ImageButton) convertView;
         }
 
-        final int row = position / this.board.length;
-        final int column = position % this.board.length;
+        final int row = position / this.size;
+        final int column = position % this.size;
 
-        if (this.board[column][row].isYellow()){
-            token.setImageResource(R.drawable.y);
-        } else if (this.board[column][row].isRed()){
+        if (board.isYellowCell(new Position(row, column))){
+            token.setImageResource(R.drawable.y );
+        } else if (this.board.isRedCell(new Position(row, column))){
             token.setImageResource(R.drawable.r);
         }else{
             token.setImageResource(R.drawable.w);
@@ -72,7 +98,7 @@ public class Table extends BaseAdapter {
                 else  token.setImageResource(R.drawable.r);
                 last = !last;
             }
-        });
+        });*/
         //final Position p = new Position(column,row);
        /* token.setOnClickListener(new View.OnClickListener() {
             @Override

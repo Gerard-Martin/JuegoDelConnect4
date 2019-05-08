@@ -10,8 +10,8 @@ public class Direction {
             DOWN, RIGHT, MAIN_DIAGONAL, CONTRA_DIAGONAL
     };
 
-    public final int changeInRow;
-    public final int changeInColumn;
+    private final int changeInRow;
+    private final int changeInColumn;
 
     public Direction(int changeInRow, int changeInColumn) {
         this.changeInRow = changeInRow;
@@ -27,6 +27,6 @@ public class Direction {
     }
 
     public Direction invert() {
-       return null;
+        return new Direction(this.changeInRow * -1, this.changeInColumn * -1);
     }
 }

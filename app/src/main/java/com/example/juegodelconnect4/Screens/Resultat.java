@@ -60,6 +60,7 @@ public class Resultat extends AppCompatActivity {
 
     public void sortir(View view) {
         finish();
+        System.exit(0);
     }
 
     public void compose() {

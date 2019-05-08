@@ -165,7 +165,6 @@
         <Button
             android:id="@+id/comencar"
             android:layout_width="wrap_content"
-            android:onClick="comencar"
             android:layout_height="wrap_content"
             android:text="@string/comencar" />
     </LinearLayout>
