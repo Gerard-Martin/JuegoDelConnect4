@@ -133,21 +133,28 @@ public class Game extends AppCompatActivity {
     }
 
     // state members related with time
+    @SuppressLint("SetTextI18n")
     public void time(){
         timertask = new Runnable() {
             @Override
             public void run() {
-                mHandler.postDelayed(this, 1000);
-                if(selectedtime >= 0) timertext.setText(String.valueOf(selectedtime) + getResources().getString(R.string.tformat));
-                if(selectedtime == 0) mHandler.sendEmptyMessage(0);
-                if(!time)timertext.setText(String.valueOf(expendtime) + getResources().getString(R.string.tformat));
                 selectedtime -= 1;
                 expendtime += 1;
+                if(selectedtime == 0 && time) mHandler.sendEmptyMessage(0);
+                else mHandler.postDelayed(this, 1000);
+                //if(!time)timertext.setText(String.valueOf(expendtime) + getResources().getString(R.string.tformat));
+                //else
+                if(selectedtime >= 0) timertext.setText(String.valueOf(selectedtime) +
+                        getResources().getString(R.string.tformat));
             }
         };
         try{
+            //if(!time)timertext.setText(String.valueOf(expendtime) + getResources().getString(R.string.tformat));
+            //else
+            if(selectedtime >= 0) timertext.setText(String.valueOf(selectedtime) +
+                    getResources().getString(R.string.tformat));
             mHandler.removeCallbacks(timertask);
-            mHandler.postDelayed(timertask, 0);
+            mHandler.postDelayed(timertask, 1000);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -180,6 +187,7 @@ public class Game extends AppCompatActivity {
             // Gestionar-ho d'alguna forma amb el handler
             extras.putString(getResources().getString(R.string.fin),
                     getResources().getString(R.string.timespend));
+            acabament();
         }
     }
     /*boolean checkForFinish(Position pos) {
@@ -216,7 +224,7 @@ public class Game extends AppCompatActivity {
 
     private void acabament(){
         mHandler.removeCallbacks(timertask);
-        extras.putInt(getResources().getString(R.string.total), expendtime-1);
+        extras.putInt(getResources().getString(R.string.total), expendtime);
         Intent resultat = new Intent(this, Resultat.class);
         resultat.putExtra(getResources().getString(R.string.extrasbundle), extras);
         startActivity(resultat);
