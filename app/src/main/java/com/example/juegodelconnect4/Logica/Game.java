@@ -1,12 +1,16 @@
 package com.example.juegodelconnect4.Logica;
 
 import android.annotation.SuppressLint;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Bundle;
 import android.os.Build;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.GridView;
 import android.content.Intent;
 import android.widget.ImageView;
@@ -112,9 +116,16 @@ public class Game extends AppCompatActivity {
                 int boardSize = Math.min(width, height);
                 table = new Table(getApplicationContext(), board, boardSize);
                 table.notifyDataSetChanged();
+                int orientation = getResources().getConfiguration().orientation;
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    gridview.setHorizontalSpacing(boardSize- Math.max(width, height));
+                }
                 gridview.setAdapter(table);
                 tableRow = new TableRow(getApplicationContext(), board, Game.this, boardSize);
                 tableRow.notifyDataSetChanged();
+                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                    buttongrid.setHorizontalSpacing(boardSize- Math.max(width, height));
+                }
                 buttongrid.setAdapter(tableRow);
             }
         });
@@ -126,11 +137,12 @@ public class Game extends AppCompatActivity {
         timertask = new Runnable() {
             @Override
             public void run() {
+                mHandler.postDelayed(this, 1000);
                 if(selectedtime >= 0) timertext.setText(String.valueOf(selectedtime) + getResources().getString(R.string.tformat));
                 if(selectedtime == 0) mHandler.sendEmptyMessage(0);
+                if(!time)timertext.setText(String.valueOf(expendtime) + getResources().getString(R.string.tformat));
                 selectedtime -= 1;
                 expendtime += 1;
-                mHandler.postDelayed(this, 1000);
             }
         };
         try{
@@ -168,7 +180,6 @@ public class Game extends AppCompatActivity {
             // Gestionar-ho d'alguna forma amb el handler
             extras.putString(getResources().getString(R.string.fin),
                     getResources().getString(R.string.timespend));
-            acabament();
         }
     }
     /*boolean checkForFinish(Position pos) {
@@ -205,10 +216,39 @@ public class Game extends AppCompatActivity {
 
     private void acabament(){
         mHandler.removeCallbacks(timertask);
-        extras.putInt(getResources().getString(R.string.total), expendtime);
+        extras.putInt(getResources().getString(R.string.total), expendtime-1);
         Intent resultat = new Intent(this, Resultat.class);
         resultat.putExtra(getResources().getString(R.string.extrasbundle), extras);
         startActivity(resultat);
         finish();
     }
+
+   /* public void imageToast(String s, int d){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        ImageView image = layout.findViewById(R.id.image);
+        image.setImageResource(d);
+        TextView text = layout.findViewById(R.id.text);
+        text.setText(s);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
+    }
+
+    private void notifier(){
+        if(equals(getResources().getString(R.string.cpuguanyat))){
+            imageToast(getResources().getString(R.string.cpuguanyat), R.drawable.lost);
+        }else if (equals(getResources().getString(R.string.jugadorguanyat))){
+            imageToast(getResources().getString(R.string.jugadorguanyat), R.drawable.win);
+        }else if (equals(getResources().getString(R.string.emt))){
+            imageToast(getResources().getString(R.string.emt), R.drawable.tie);
+        }else{
+            imageToast(getResources().getString(R.string.tt), R.drawable.timer);
+        }
+    }*/
+
 }
