@@ -1,19 +1,22 @@
 package com.example.juegodelconnect4.Logica;
 
 
-public class Board {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Board implements Parcelable {
 
     private final int size;
     private Cell[][] cells;
 
-    private int yellow;
-    private int red;
+    //private int yellow;
+    //private int red;
 
     public Board(int size) {
         this.size = size;
         this.cells = new Cell[size][size];
-        this.red = 0;
-        this.yellow = 0;
+        //this.red = 0;
+        //this.yellow = 0;
         for(int i = 0; i< size;i++) {
             for (int j = 0; j < size; j++) {
                 this.cells[i][j]=Cell.empty();
@@ -24,9 +27,21 @@ public class Board {
     Board(Board b) {
         this.size = b.size;
         this.cells = b.getCells();
-        this.red = b.red;
-        this.yellow = b.yellow;
+        //this.red = b.red;
+        //this.yellow = b.yellow;
     }
+
+    public static final Creator<Board> CREATOR = new Creator<Board>() {
+        @Override
+        public Board createFromParcel(Parcel in) {
+            return new Board(in);
+        }
+
+        @Override
+        public Board[] newArray(int size) {
+            return new Board[size];
+        }
+    };
 
     private Cell[][] getCells() {
         Cell[][] temp = new Cell[size][size];
@@ -116,5 +131,27 @@ public class Board {
 
     private boolean inBoardLimits(int row, int col){
         return row < size && row >= 0 && col < size && col >= 0;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(size);
+        for(int i = 0; i < this.size; i ++){
+            dest.writeTypedArray(cells[i], flags);
+        }
+    }
+
+    private Board(Parcel in) {
+        this.size = in.readInt();
+
+        this.cells = new Cell[this.size][];
+        for (int i = 0; i < this.size; i ++){
+            this.cells[i] = in.createTypedArray(Cell.CREATOR);
+        }
     }
 }
