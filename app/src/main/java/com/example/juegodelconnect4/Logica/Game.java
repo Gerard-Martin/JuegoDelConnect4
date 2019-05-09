@@ -8,9 +8,6 @@ import android.os.Bundle;
 import android.os.Build;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.GridView;
 import android.content.Intent;
 import android.widget.ImageView;
@@ -59,6 +56,8 @@ public class Game extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
+        this.state = State.RED;
+
         in = getIntent();
         extras = in.getBundleExtra(getResources().getString(R.string.extrasbundle));
 
@@ -80,28 +79,43 @@ public class Game extends AppCompatActivity {
         time();
     }
 
-    /*@Override
+    @SuppressLint("SetTextI18n")
+    @Override
     public void onRestoreInstanceState(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
+        super.onRestoreInstanceState(savedInstanceState);
+        board = savedInstanceState.getParcelable(getResources().getString(R.string.board));
+        selectedtime = savedInstanceState.getInt(getResources().getString(R.string.timespend));
+        expendtime = savedInstanceState.getInt(getResources().getString(R.string.total));
+        time = savedInstanceState.getBoolean(getResources().getString(R.string.timekey));
+        extras = savedInstanceState.getBundle(getResources().getString(R.string.extrasbundle));
+        state = State.valueOf(savedInstanceState.getString(getResources().getString(R.string.state)));
+
+        timertext.setText(String.valueOf((selectedtime >= 0) ? selectedtime : 0) +
+                getResources().getString(R.string.tformat));
+        if(state == State.RED){
+            tornImage.setImageResource(R.drawable.r);
+        }else{
+            tornImage.setImageResource(R.drawable.y);
+        }
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-    }*/
+        mHandler.removeCallbacks(timertask);
+        outState.putParcelable(getResources().getString(R.string.board), board);
+        outState.putInt(getResources().getString(R.string.timespend), selectedtime);
+        outState.putInt(getResources().getString(R.string.total), expendtime);
+        outState.putBoolean(getResources().getString(R.string.timekey), time);
+        outState.putBundle(getResources().getString(R.string.extrasbundle), extras);
+        outState.putString(getResources().getString(R.string.state), state.toString());
+    }
 
     public void init(){
-        this.state = State.RED;
-
         board = new Board(boardSize);
         gridview.setNumColumns(boardSize);
         buttongrid.setNumColumns(boardSize);
-        //table = new Table(this, board/*, this*/);
-        //table.notifyDataSetChanged();
-        //tableRow = new TableRow(this, board, this);
-        //tableRow.notifyDataSetChanged();
-        //buttongrid.setAdapter(tableRow);
-        //gridview.setAdapter(table);
+
         ViewTreeObserver vto = g1.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

@@ -41,6 +41,21 @@ public class Configuracio extends AppCompatActivity {
         picker();
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        final CheckBox checktime = findViewById(R.id.checkBox);
+        TextView timetext = findViewById(R.id.top);
+        NumberPicker timeselected = findViewById(R.id.numberpicker);
+        if(checktime.isChecked()){
+            timetext.setVisibility(View.VISIBLE);
+            timeselected.setVisibility(View.VISIBLE);
+        }else{
+            timetext.setVisibility(View.INVISIBLE);
+            timeselected.setVisibility(View.INVISIBLE);
+        }
+
+    }
 
     public void comencar(View view) {
         EditText aliasc = findViewById(R.id.aliasc);
