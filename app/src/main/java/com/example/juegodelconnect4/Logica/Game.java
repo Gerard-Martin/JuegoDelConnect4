@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Build;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.GridView;
 import android.content.Intent;
 import android.widget.ImageView;
@@ -19,10 +20,15 @@ import android.view.ViewTreeObserver;
 import com.example.juegodelconnect4.R;
 import com.example.juegodelconnect4.Screens.Resultat;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Game extends AppCompatActivity {
     private State state = State.RED;
     private final int toWin = 4;
     private boolean hasWinner;
+    private int index = 0;
+    private List<Board> saved = new ArrayList<>();
 
     private GridView gridview, buttongrid;
     private LinearLayout c1, g1;
@@ -115,7 +121,9 @@ public class Game extends AppCompatActivity {
         board = new Board(boardSize);
         gridview.setNumColumns(boardSize);
         buttongrid.setNumColumns(boardSize);
-
+        if(saved.isEmpty()){
+            saved.add(new Board(boardSize));
+        }
         ViewTreeObserver vto = g1.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -212,6 +220,7 @@ public class Game extends AppCompatActivity {
     void drop(int col){
         Position occupyPos = board.occupyCell(col, state);
         if (occupyPos != null) {
+            addBoard(new Board(board));
             table.notifyDataSetChanged();
             //System.out.println("maxconnectec " + board.maxConnected(occupyPos));
             //if(checkForFinish(occupyPos))//si checkForFinish comencem tot el procés per anar a Resultat
@@ -245,32 +254,58 @@ public class Game extends AppCompatActivity {
         finish();
     }
 
-   /* public void imageToast(String s, int d){
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast,
-                (ViewGroup) findViewById(R.id.toast_layout_root));
-
-        ImageView image = layout.findViewById(R.id.image);
-        image.setImageResource(d);
-        TextView text = layout.findViewById(R.id.text);
-        text.setText(s);
-
-        Toast toast = new Toast(getApplicationContext());
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
+    public void unDo(View clickedButton) {
+        if(index > 0) {
+            index--;
+            this.board = new Board(saved.get(index));
+            gridview.setNumColumns(boardSize);
+            table = new Table(this, this.board, boardSize);
+            table.notifyDataSetChanged();
+            gridview.setAdapter(table);
+        } else {
+            Toast.makeText(this, "No hi ha partides per recuperar", Toast.LENGTH_LONG).show();
+        }
+        //if(!cpu){
+            if(index%2 != 0){
+                state = State.RED;
+            }else{
+                state = State.YELLOW;
+            }
+        //}
     }
 
-    private void notifier(){
-        if(equals(getResources().getString(R.string.cpuguanyat))){
-            imageToast(getResources().getString(R.string.cpuguanyat), R.drawable.lost);
-        }else if (equals(getResources().getString(R.string.jugadorguanyat))){
-            imageToast(getResources().getString(R.string.jugadorguanyat), R.drawable.win);
-        }else if (equals(getResources().getString(R.string.emt))){
-            imageToast(getResources().getString(R.string.emt), R.drawable.tie);
-        }else{
-            imageToast(getResources().getString(R.string.tt), R.drawable.timer);
-        }
-    }*/
 
+    public void reDo(View clickedButton) {
+        if(index+1 < saved.size()) {
+            index++;
+            this.board = new Board(saved.get(index));
+            gridview.setNumColumns(boardSize);
+            table = new Table(this, this.board, boardSize);
+            table.notifyDataSetChanged();
+            gridview.setAdapter(table);
+        } else {
+            Toast.makeText(this, "No es pot refer cap acció", Toast.LENGTH_LONG).show();
+        }
+        //if(!cpu){
+            if(index%2 != 0){
+                state = State.RED;
+            }else{
+                state = State.YELLOW;
+            }
+        //}
+    }
+
+    public void addBoard(Board b){
+        if(index<saved.size()-1) clean();
+        saved.add(b);
+        index++;
+    }
+
+    public void clean(){
+        List<Board> temp = new ArrayList<>();
+        for(int i=0; i<=index;i++){
+            temp.add(new Board(saved.get(i)));
+        }
+        saved = temp;
+    }
 }
