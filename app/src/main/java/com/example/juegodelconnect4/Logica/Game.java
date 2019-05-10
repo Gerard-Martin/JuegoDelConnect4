@@ -19,6 +19,9 @@ import android.view.ViewTreeObserver;
 import com.example.juegodelconnect4.R;
 import com.example.juegodelconnect4.Screens.Resultat;
 
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 public class Game extends AppCompatActivity {
     private State state = State.RED;
     private final int toWin = 4;
@@ -34,6 +37,7 @@ public class Game extends AppCompatActivity {
     int selectedtime;
     int expendtime = 0;
     int boardSize;
+    Random rand;
 
     private Intent in;
     private Bundle extras;
@@ -181,8 +185,18 @@ public class Game extends AppCompatActivity {
   
     Position playOpponent() {
         // Controla on farà el següent moviment la CPU, primer serà aleatori i després s'implementara una heurística.
-        //toggleTurn(); // Desactivat de moment
-        return null;
+        rand = new Random();
+        int column = rand.nextInt(boardSize);
+        Position oponentPos = board.occupyCell(column, state);
+        while(oponentPos == null) oponentPos = board.occupyCell(column, state);
+        /*System.out.println("before sleep");
+        try{TimeUnit.SECONDS.sleep(1);}
+        catch (Exception e){ }
+        System.out.println("after sleep");*/
+        table.notifyDataSetChanged();
+        checkFinalPartida(oponentPos);
+        toggleTurn(); // Desactivat de moment
+        return oponentPos;
     }
 
     void toggleTurn() {

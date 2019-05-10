@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.example.juegodelconnect4.R;
 
+import java.util.concurrent.TimeUnit;
+
 public class Table extends BaseAdapter {
     private Context context;
     private Board board;
