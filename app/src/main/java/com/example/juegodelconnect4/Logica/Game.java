@@ -17,12 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.ViewTreeObserver;
-
 import com.example.juegodelconnect4.R;
 import com.example.juegodelconnect4.Screens.Resultat;
-
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class Game extends AppCompatActivity {
     private State state = State.RED;
@@ -37,9 +38,10 @@ public class Game extends AppCompatActivity {
     private TableRow tableRow;
     private Board board;
 
-    boolean time;
+    boolean time, cpu;
     int selectedtime;
     int expendtime = 0;
+    Random rand;
     int boardDimen, boardSize;
     int width, height;
 
@@ -70,6 +72,7 @@ public class Game extends AppCompatActivity {
         extras = in.getBundleExtra(getResources().getString(R.string.extrasbundle));
 
         time = extras.getBoolean(getResources().getString(R.string.timekey), false);
+        cpu = extras.getBoolean(getResources().getString(R.string.cpu), false);
         boardSize = extras.getInt(getResources().getString(R.string.sizekey), 7);
         selectedtime = extras.getInt(getResources().getString(R.string.timespend), 25);
 
@@ -195,15 +198,25 @@ public class Game extends AppCompatActivity {
   
     Position playOpponent() {
         // Controla on farà el següent moviment la CPU, primer serà aleatori i després s'implementara una heurística.
-        //toggleTurn(); // Desactivat de moment
-        return null;
+        rand = new Random();
+        int column = rand.nextInt(boardSize);
+        Position oponentPos = board.occupyCell(column, state);
+        while(oponentPos == null) oponentPos = board.occupyCell(column, state);
+        /*System.out.println("before sleep");
+        try{TimeUnit.SECONDS.sleep(1);}
+        catch (Exception e){ }
+        System.out.println("after sleep");*/
+        table.notifyDataSetChanged();
+        checkFinalPartida(oponentPos);
+        toggleTurn(); // Desactivat de moment
+        return oponentPos;
     }
 
     void toggleTurn() {
         if(state == State.RED){
             this.state = State.YELLOW;
             tornImage.setImageResource(R.drawable.y);
-            playOpponent();
+            if(cpu) playOpponent();
         }else{
             this.state = State.RED;
             tornImage.setImageResource(R.drawable.r);

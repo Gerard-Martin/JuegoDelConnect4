@@ -62,7 +62,7 @@ public class Configuracio extends AppCompatActivity {
 
     public void comencar(View view) {
         EditText aliasc = findViewById(R.id.aliasc);
-        //SeekBar grid = findViewById(R.id.sb);
+        Switch cpu = findViewById(R.id.cpu);
         CheckBox time = findViewById(R.id.checkBox);
         Switch switchbtn = findViewById(R.id.checkBox1);
         if(TextUtils.isEmpty(aliasc.getText().toString())){
@@ -74,7 +74,7 @@ public class Configuracio extends AppCompatActivity {
             extras.putInt(getResources().getString(R.string.sizekey), size);
             extras.putBoolean(getResources().getString(R.string.timekey), time.isChecked());
             extras.putInt(getResources().getString(R.string.timespend), selected);
-            extras.putBoolean(getResources().getString(R.string.cpukey), switchbtn.isChecked());
+            extras.putBoolean(getResources().getString(R.string.cpu), cpu.isChecked());
             in.putExtra(getResources().getString(R.string.extrasbundle), extras);
             startActivity(in);
             finish();
