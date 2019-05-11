@@ -16,8 +16,6 @@ import java.util.concurrent.TimeUnit;
 public class Table extends BaseAdapter {
     private Context context;
     private Board board;
-    //final Cell[][] board;
-    //private Game game;
     boolean last = true;
 
     private int size, boardSize;

@@ -1,7 +1,6 @@
 package com.example.juegodelconnect4.Logica;
 
 import android.annotation.SuppressLint;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Bundle;
@@ -20,13 +19,12 @@ import android.view.ViewTreeObserver;
 import com.example.juegodelconnect4.R;
 import com.example.juegodelconnect4.Screens.Resultat;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class Game extends AppCompatActivity {
-    private State state = State.RED;
+    State state = State.RED;
     private final int toWin = 4;
     private boolean hasWinner;
     private int index = 0;
@@ -39,11 +37,11 @@ public class Game extends AppCompatActivity {
     private Board board;
 
     boolean time, cpu;
-    int selectedtime;
-    int expendtime = 0;
-    Random rand;
-    int boardDimen, boardSize;
-    int width, height;
+    private int selectedtime;
+    private int expendtime = 0;
+    private Random rand = new Random();
+    private int boardDimen, boardSize;
+    private int width, height;
 
     private Intent in;
     private Bundle extras;
@@ -59,7 +57,37 @@ public class Game extends AppCompatActivity {
             }
         }
     };
-    private Runnable timertask;
+    private Runnable timertask = new Runnable() {
+        @SuppressLint("SetTextI18n")
+        @Override
+        public void run() {
+            selectedtime -= 1;
+            expendtime += 1;
+            if(selectedtime == 0 && time) mHandler.sendEmptyMessage(0);
+            else mHandler.postDelayed(this, 1000);
+            //if(!time)timertext.setText(String.valueOf(expendtime) + getResources().getString(R.string.tformat));
+            //else
+            if(selectedtime >= 0) timertext.setText(String.valueOf(selectedtime) +
+                    getResources().getString(R.string.tformat));
+        }
+    };
+    private Runnable oponentTask = new Runnable() {
+        @Override
+        public void run() {
+
+            int column = rand.nextInt(boardSize);
+            Position oponentPos = board.occupyCell(column, state);
+            while(oponentPos == null && board.hasValidMoves()){
+                column = rand.nextInt(boardSize);
+                oponentPos = board.occupyCell(column, state);
+            }
+            table.notifyDataSetChanged();
+            checkFinalPartida(oponentPos);
+            toggleTurn();
+            mHandler.post(timertask);
+            return;
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +126,7 @@ public class Game extends AppCompatActivity {
         selectedtime = savedInstanceState.getInt(getResources().getString(R.string.timespend));
         expendtime = savedInstanceState.getInt(getResources().getString(R.string.total));
         time = savedInstanceState.getBoolean(getResources().getString(R.string.timekey));
+        cpu = savedInstanceState.getBoolean(getResources().getString(R.string.cpu));
         extras = savedInstanceState.getBundle(getResources().getString(R.string.extrasbundle));
         state = State.valueOf(savedInstanceState.getString(getResources().getString(R.string.state)));
         saved = savedInstanceState.getParcelableArrayList(getResources().getString(R.string.list));
@@ -119,6 +148,7 @@ public class Game extends AppCompatActivity {
         outState.putInt(getResources().getString(R.string.timespend), selectedtime);
         outState.putInt(getResources().getString(R.string.total), expendtime);
         outState.putBoolean(getResources().getString(R.string.timekey), time);
+        outState.putBoolean(getResources().getString(R.string.cpu), cpu);
         outState.putBundle(getResources().getString(R.string.extrasbundle), extras);
         outState.putString(getResources().getString(R.string.state), state.toString());
         outState.putParcelableArrayList(getResources().getString(R.string.list), (ArrayList<? extends Parcelable>) saved);
@@ -166,19 +196,6 @@ public class Game extends AppCompatActivity {
     // state members related with time
     @SuppressLint("SetTextI18n")
     public void time(){
-        timertask = new Runnable() {
-            @Override
-            public void run() {
-                selectedtime -= 1;
-                expendtime += 1;
-                if(selectedtime == 0 && time) mHandler.sendEmptyMessage(0);
-                else mHandler.postDelayed(this, 1000);
-                //if(!time)timertext.setText(String.valueOf(expendtime) + getResources().getString(R.string.tformat));
-                //else
-                if(selectedtime >= 0) timertext.setText(String.valueOf(selectedtime) +
-                        getResources().getString(R.string.tformat));
-            }
-        };
         try{
             //if(!time)timertext.setText(String.valueOf(expendtime) + getResources().getString(R.string.tformat));
             //else
@@ -195,28 +212,21 @@ public class Game extends AppCompatActivity {
 */
     //public Game(int size, int toWin) {  }
     //  getters and setters
-  
-    Position playOpponent() {
+    int heuristic(){
+        return 0;
+    }
+    void playOpponent() {
         // Controla on farà el següent moviment la CPU, primer serà aleatori i després s'implementara una heurística.
-        rand = new Random();
-        int column = rand.nextInt(boardSize);
-        Position oponentPos = board.occupyCell(column, state);
-        while(oponentPos == null) oponentPos = board.occupyCell(column, state);
-        /*System.out.println("before sleep");
-        try{TimeUnit.SECONDS.sleep(1);}
-        catch (Exception e){ }
-        System.out.println("after sleep");*/
-        table.notifyDataSetChanged();
-        checkFinalPartida(oponentPos);
-        toggleTurn(); // Desactivat de moment
-        return oponentPos;
+        mHandler.removeCallbacks(timertask);
+        mHandler.postDelayed(oponentTask, 1000);
+
     }
 
     void toggleTurn() {
         if(state == State.RED){
             this.state = State.YELLOW;
             tornImage.setImageResource(R.drawable.y);
-            if(cpu) playOpponent();
+            if(cpu && board.hasValidMoves()) playOpponent();
         }else{
             this.state = State.RED;
             tornImage.setImageResource(R.drawable.r);
@@ -231,10 +241,6 @@ public class Game extends AppCompatActivity {
             acabament();
         }
     }
-    /*boolean checkForFinish(Position pos) {
-        // comprovar hasValidMoves  i max connected al fer un moviment.
-        return !board.hasValidMoves() || board.maxConnected(pos) == this.toWin;
-    }*/
 
     void drop(int col){
         Position occupyPos = board.occupyCell(col, state);
@@ -265,6 +271,7 @@ public class Game extends AppCompatActivity {
     }
 
     private void acabament(){
+        mHandler.removeCallbacks(oponentTask);
         mHandler.removeCallbacks(timertask);
         extras.putInt(getResources().getString(R.string.total), expendtime);
         Intent resultat = new Intent(this, Resultat.class);
@@ -288,13 +295,13 @@ public class Game extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No hi ha partides per recuperar", Toast.LENGTH_LONG).show();
         }
-        //if(!cpu){
+        if(!cpu){
             if(index%2 != 0){
                 state = State.RED;
             }else{
                 state = State.YELLOW;
             }
-        //}
+        }
     }
 
 
@@ -313,13 +320,13 @@ public class Game extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No es pot refer cap acció", Toast.LENGTH_LONG).show();
         }
-        //if(!cpu){
+        if(!cpu){
             if(index%2 != 0){
                 state = State.RED;
             }else{
                 state = State.YELLOW;
             }
-        //}
+        }
     }
 
     public void addBoard(Board b){

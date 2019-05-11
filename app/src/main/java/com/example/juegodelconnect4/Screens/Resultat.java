@@ -1,5 +1,6 @@
 package com.example.juegodelconnect4.Screens;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -9,11 +10,9 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.view.LayoutInflater;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -54,6 +53,7 @@ public class Resultat extends AppCompatActivity {
         compose();
     }
 
+    @SuppressLint("IntentReset")
     public void enviarPartida(View view) {
         EditText e = findViewById(R.id.em);
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -74,7 +74,7 @@ public class Resultat extends AppCompatActivity {
         System.exit(0);
     }
 
-    public void imageToast(String s, int d){
+    public void imageToasts(String s, int d){
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast,
                 (ViewGroup) findViewById(R.id.toast_layout_root));
