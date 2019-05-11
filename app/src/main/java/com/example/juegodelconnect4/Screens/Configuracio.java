@@ -1,14 +1,15 @@
 package com.example.juegodelconnect4.Screens;
 
 import android.content.Intent;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -39,6 +40,7 @@ public class Configuracio extends AppCompatActivity {
         seekBar();
         checkBox();
         picker();
+        checkSwitch();
     }
 
     @Override
@@ -59,8 +61,9 @@ public class Configuracio extends AppCompatActivity {
 
     public void comencar(View view) {
         EditText aliasc = findViewById(R.id.aliasc);
-        //SeekBar grid = findViewById(R.id.sb);
+        Switch cpu = findViewById(R.id.cpu);
         CheckBox time = findViewById(R.id.checkBox);
+        //Switch switchbtn = findViewById(R.id.checkBox1);
         if(TextUtils.isEmpty(aliasc.getText().toString())){
             aliasc.setError(getResources().getString(R.string.nomerror));
         }else {
@@ -70,6 +73,7 @@ public class Configuracio extends AppCompatActivity {
             extras.putInt(getResources().getString(R.string.sizekey), size);
             extras.putBoolean(getResources().getString(R.string.timekey), time.isChecked());
             extras.putInt(getResources().getString(R.string.timespend), selected);
+            extras.putBoolean(getResources().getString(R.string.cpu), cpu.isChecked());
             in.putExtra(getResources().getString(R.string.extrasbundle), extras);
             startActivity(in);
             finish();
@@ -117,6 +121,25 @@ public class Configuracio extends AppCompatActivity {
             }
         });
     }
+
+    public void checkSwitch(){
+       Switch switchbtn = (Switch)findViewById(R.id.cpu);
+       switchbtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               if(isChecked){
+                   String message = " Jugar contra la CPU: Activat ";
+                   Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+               }else{
+                   String message = " Jugar contra la CPU: Desactivat ";
+                   Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+               }
+           }
+       });
+    }
+
+
 
     public void picker(){
         NumberPicker numberPicker = findViewById(R.id.numberpicker);

@@ -17,7 +17,7 @@ public class TableRow extends BaseAdapter {
     private Game game;
     private int size, boardSize;
 
-    public TableRow(Context cont, Board board, Game game, int boardsize){
+    TableRow(Context cont, Board board, Game game, int boardsize){
         this.context = cont;
         this.board = board;
         this.game = game;
@@ -63,7 +63,9 @@ public class TableRow extends BaseAdapter {
             public void onClick(View v)
             {
                 //Toast.makeText(v.getContext(), "Button #" + (position + 1), Toast.LENGTH_SHORT).show();
-                game.drop(position);
+                if(game.cpu && game.state == State.YELLOW) Toast.makeText(v.getContext(),
+                        "Torn del oponent", Toast.LENGTH_SHORT).show();
+                else game.drop(position);
             }
         });
 

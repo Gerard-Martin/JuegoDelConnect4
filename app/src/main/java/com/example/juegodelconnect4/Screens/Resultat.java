@@ -1,13 +1,20 @@
 package com.example.juegodelconnect4.Screens;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.juegodelconnect4.R;
 
@@ -46,6 +53,7 @@ public class Resultat extends AppCompatActivity {
         compose();
     }
 
+    @SuppressLint("IntentReset")
     public void enviarPartida(View view) {
         EditText e = findViewById(R.id.em);
         Intent intent = new Intent(Intent.ACTION_VIEW);
@@ -66,23 +74,65 @@ public class Resultat extends AppCompatActivity {
         System.exit(0);
     }
 
+    public void imageToasts(String s, int d){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        ImageView image = layout.findViewById(R.id.image);
+        image.setImageResource(d);
+        TextView text = layout.findViewById(R.id.text);
+        text.setText(s);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+    }
+
     public void compose() {
         EditText log;
         log = findViewById(R.id.vall);
         if(fin.equals(getResources().getString(R.string.emt))){
+            imageToast(getResources().getString(R.string.emt), R.drawable.tie);
             logc = String.format(getResources().getString(R.string.base), alias, size, total)+'\n';
             logc += getResources().getString(R.string.emt);
+            imageToast(getResources().getString(R.string.emt), R.drawable.tie);
         }else{
             logc = String.format(getResources().getString(R.string.base), alias, size, total)+'\n';
             if(fin.equals(getResources().getString(R.string.guanyat))){
+                imageToast(getResources().getString(R.string.guanyat), R.drawable.win);
                 logc += getResources().getString(R.string.guanyat);
+                imageToast(getResources().getString(R.string.guanyat), R.drawable.win);
             }else if(fin.equals(getResources().getString(R.string.perdut))){
+                imageToast(getResources().getString(R.string.perdut), R.drawable.lost);
                 logc += getResources().getString(R.string.perdut);
+                imageToast(getResources().getString(R.string.perdut), R.drawable.lost);
             }else{
+                imageToast(getResources().getString(R.string.timespend), R.drawable.timer);
                 logc += getResources().getString(R.string.timespend);
+                imageToast(getResources().getString(R.string.timespend), R.drawable.timer);
             }
         }
         log.setText(logc);
+    }
+
+    public void imageToast(String s, int d){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast,
+                (ViewGroup) findViewById(R.id.toast_layout_root));
+
+        ImageView image = layout.findViewById(R.id.image);
+        image.setImageResource(d);
+        TextView text = layout.findViewById(R.id.text);
+        text.setText(s);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 
     public void customButtons() {

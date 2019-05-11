@@ -35,17 +35,22 @@
     <string name="cpuguanyat">"Vosté ha perdut!"</string>
     <string name="jugadorguanyat">"Vosté ha guanyat!"</string>
     <string name="tt">"S'ha esgotat el temps!"</string>
-    <string name="base">Alias: %s \n Mida Graella: %d Temps total: %d secs.</string>
+    <string name="base">Alias: %s \nMida Graella: %d Temps total: %d secs.</string>
     <string name="guanyat">Has Guanyat!</string>
     <string name="perdut">Has Perdut!</string>
     <string name="timespend">Has esgotat el temps!</string>
+    <string name="cpukey">"cpu"</string>
     <string name="timekey">"time"</string>
     <string name="torn">"Torn:"</string>
     <string name="tformat"> secs.</string>
     <string name="fullcol">Columna plena</string>
     <string name="extrasbundle">Extras Bundle</string>
+    <string name="list">"list"</string>
     <string name="temps" formatted="false">Temps restant: %d segons</string>
     <string name="tempsinici" formatted="false">Temps des del inici: %d segons</string>
     <string name="board">Graella</string>
     <string name="state">Estat</string>
+    <string name="cpu">CPU</string>
+    <string name="redo">Redo</string>
+    <string name="undo">Undo</string>
 </resources>
