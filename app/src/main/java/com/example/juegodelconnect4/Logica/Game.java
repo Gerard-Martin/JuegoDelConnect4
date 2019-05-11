@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.os.Build;
 import android.os.Message;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.GridView;
@@ -39,7 +40,8 @@ public class Game extends AppCompatActivity {
     boolean time;
     int selectedtime;
     int expendtime = 0;
-    int boardSize;
+    int boardDimen, boardSize;
+    int width, height;
 
     private Intent in;
     private Bundle extras;
@@ -95,6 +97,7 @@ public class Game extends AppCompatActivity {
         time = savedInstanceState.getBoolean(getResources().getString(R.string.timekey));
         extras = savedInstanceState.getBundle(getResources().getString(R.string.extrasbundle));
         state = State.valueOf(savedInstanceState.getString(getResources().getString(R.string.state)));
+        saved = savedInstanceState.getParcelableArrayList(getResources().getString(R.string.list));
 
         timertext.setText(String.valueOf((selectedtime >= 0) ? selectedtime : 0) +
                 getResources().getString(R.string.tformat));
@@ -115,6 +118,7 @@ public class Game extends AppCompatActivity {
         outState.putBoolean(getResources().getString(R.string.timekey), time);
         outState.putBundle(getResources().getString(R.string.extrasbundle), extras);
         outState.putString(getResources().getString(R.string.state), state.toString());
+        outState.putParcelableArrayList(getResources().getString(R.string.list), (ArrayList<? extends Parcelable>) saved);
     }
 
     public void init(){
@@ -122,7 +126,7 @@ public class Game extends AppCompatActivity {
         gridview.setNumColumns(boardSize);
         buttongrid.setNumColumns(boardSize);
         if(saved.isEmpty()){
-            saved.add(new Board(boardSize));
+            saved.add(new Board(this.board));
         }
         ViewTreeObserver vto = g1.getViewTreeObserver();
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -133,20 +137,22 @@ public class Game extends AppCompatActivity {
                 } else {
                     g1.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 }
-                int width  = g1.getMeasuredWidth();
-                int height = g1.getMeasuredHeight();
-                int boardSize = Math.min(width, height);
-                table = new Table(getApplicationContext(), board, boardSize);
+                width  = g1.getMeasuredWidth();
+                height = g1.getMeasuredHeight();
+                boardDimen = Math.min(width, height);
+
+                table = new Table(getApplicationContext(), board, boardDimen);
                 table.notifyDataSetChanged();
-                int orientation = getResources().getConfiguration().orientation;
-                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    gridview.setHorizontalSpacing(boardSize- Math.max(width, height));
+                if (boardDimen != width){
+                    gridview.setHorizontalSpacing(boardDimen- Math.max(width, height));
+                    buttongrid.setHorizontalSpacing(boardDimen- Math.max(width, height));
                 }
                 gridview.setAdapter(table);
-                tableRow = new TableRow(getApplicationContext(), board, Game.this, boardSize);
+                tableRow = new TableRow(getApplicationContext(), board, Game.this, boardDimen);
                 tableRow.notifyDataSetChanged();
-                if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
-                    buttongrid.setHorizontalSpacing(boardSize- Math.max(width, height));
+                if (boardDimen != width){
+                    gridview.setHorizontalSpacing(boardDimen- Math.max(width, height));
+                    buttongrid.setHorizontalSpacing(boardDimen- Math.max(width, height));
                 }
                 buttongrid.setAdapter(tableRow);
             }
@@ -258,10 +264,14 @@ public class Game extends AppCompatActivity {
         if(index > 0) {
             index--;
             this.board = new Board(saved.get(index));
-            gridview.setNumColumns(boardSize);
-            table = new Table(this, this.board, boardSize);
+            table = new Table(getApplicationContext(), this.board, boardDimen);
             table.notifyDataSetChanged();
+            if (boardDimen != width){
+                gridview.setHorizontalSpacing(boardDimen- Math.max(width, height));
+                buttongrid.setHorizontalSpacing(boardDimen- Math.max(width, height));
+            }
             gridview.setAdapter(table);
+            gridview.setNumColumns(boardSize);
         } else {
             Toast.makeText(this, "No hi ha partides per recuperar", Toast.LENGTH_LONG).show();
         }
@@ -279,10 +289,14 @@ public class Game extends AppCompatActivity {
         if(index+1 < saved.size()) {
             index++;
             this.board = new Board(saved.get(index));
-            gridview.setNumColumns(boardSize);
-            table = new Table(this, this.board, boardSize);
+            table = new Table(getApplicationContext(), this.board, boardDimen);
             table.notifyDataSetChanged();
+            if (boardDimen != width){
+                gridview.setHorizontalSpacing(boardDimen- Math.max(width, height));
+                buttongrid.setHorizontalSpacing(boardDimen- Math.max(width, height));
+            }
             gridview.setAdapter(table);
+            gridview.setNumColumns(boardSize);
         } else {
             Toast.makeText(this, "No es pot refer cap acció", Toast.LENGTH_LONG).show();
         }
