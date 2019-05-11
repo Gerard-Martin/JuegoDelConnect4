@@ -39,6 +39,7 @@
     <string name="guanyat">Has Guanyat!</string>
     <string name="perdut">Has Perdut!</string>
     <string name="timespend">Has esgotat el temps!</string>
+    <string name="cpukey">"cpu"</string>
     <string name="timekey">"time"</string>
     <string name="torn">"Torn:"</string>
     <string name="tformat"> secs.</string>

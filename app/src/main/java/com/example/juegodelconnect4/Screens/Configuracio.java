@@ -118,6 +118,8 @@ public class Configuracio extends AppCompatActivity {
         });
     }
 
+
+
     public void picker(){
         NumberPicker numberPicker = findViewById(R.id.numberpicker);
         numberPicker.setMaxValue(150);
