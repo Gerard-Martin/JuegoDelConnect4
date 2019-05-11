@@ -72,6 +72,7 @@
             <GridView
                 android:id="@+id/buttongrid"
                 android:layout_marginBottom="10dp"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
@@ -83,13 +84,37 @@
             android:id="@+id/g1"
             android:layout_height="0dp"
             android:gravity="top"
+            android:layout_gravity="center"
             android:layout_marginBottom="15dp"
             android:layout_weight="8">
             <GridView
                 android:id="@+id/gridView"
+                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:stretchMode="columnWidth"/>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+            <Button
+                android:id="@+id/un"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:onClick="unDo"
+                android:text="@string/undo" />
+            <Button
+                android:id="@+id/re"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:onClick="reDo"
+                android:text="@string/redo" />
+         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

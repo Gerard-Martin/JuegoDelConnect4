@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -40,6 +41,7 @@ public class Configuracio extends AppCompatActivity {
         seekBar();
         checkBox();
         picker();
+        checkSwitch();
     }
 
     @Override
@@ -62,6 +64,7 @@ public class Configuracio extends AppCompatActivity {
         EditText aliasc = findViewById(R.id.aliasc);
         Switch cpu = findViewById(R.id.cpu);
         CheckBox time = findViewById(R.id.checkBox);
+        Switch switchbtn = findViewById(R.id.checkBox1);
         if(TextUtils.isEmpty(aliasc.getText().toString())){
             aliasc.setError(getResources().getString(R.string.nomerror));
         }else {
@@ -119,6 +122,25 @@ public class Configuracio extends AppCompatActivity {
             }
         });
     }
+
+    public void checkSwitch(){
+       Switch switchbtn = (Switch)findViewById(R.id.checkBox1);
+       switchbtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+               if(isChecked){
+                   String message = " Jugar contra la CPU: Activat ";
+                   Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+
+               }else{
+                   String message = " Jugar contra la CPU: Desactivat ";
+                   Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+               }
+           }
+       });
+    }
+
+
 
     public void picker(){
         NumberPicker numberPicker = findViewById(R.id.numberpicker);

@@ -101,6 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/mup"
+                    android:layout_marginStart="6dp"
                     android:text="@string/jugarcpu"/>
                 <Switch
                     android:id="@+id/cpu"
