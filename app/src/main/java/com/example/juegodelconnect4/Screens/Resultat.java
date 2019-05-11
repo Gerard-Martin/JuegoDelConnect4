@@ -78,7 +78,7 @@ public class Resultat extends AppCompatActivity {
         if(fin.equals(getResources().getString(R.string.emt))){
             logc = String.format(getResources().getString(R.string.base), alias, size, total)+'\n';
             logc += getResources().getString(R.string.emt);
-            //imageToast(getResources().getString(R.string.emt), R.drawable.win);
+            imageToast(getResources().getString(R.string.emt), R.drawable.tie);
         }else{
             logc = String.format(getResources().getString(R.string.base), alias, size, total)+'\n';
             if(fin.equals(getResources().getString(R.string.guanyat))){
