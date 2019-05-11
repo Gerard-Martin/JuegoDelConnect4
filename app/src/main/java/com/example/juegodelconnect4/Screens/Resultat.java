@@ -86,10 +86,10 @@ public class Resultat extends AppCompatActivity {
                 imageToast(getResources().getString(R.string.guanyat), R.drawable.win);
             }else if(fin.equals(getResources().getString(R.string.perdut))){
                 logc += getResources().getString(R.string.perdut);
-                imageToast(getResources().getString(R.string.guanyat), R.drawable.lost);
+                imageToast(getResources().getString(R.string.perdut), R.drawable.lost);
             }else{
                 logc += getResources().getString(R.string.timespend);
-                imageToast(getResources().getString(R.string.guanyat), R.drawable.timer);
+                imageToast(getResources().getString(R.string.timespend), R.drawable.timer);
             }
         }
         log.setText(logc);

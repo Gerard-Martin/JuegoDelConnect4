@@ -33,7 +33,7 @@ public class Game extends AppCompatActivity {
     private TableRow tableRow;
     private Board board;
 
-    boolean time;
+    boolean time, cpu;
     int selectedtime;
     int expendtime = 0;
     int boardSize;
@@ -66,6 +66,7 @@ public class Game extends AppCompatActivity {
         extras = in.getBundleExtra(getResources().getString(R.string.extrasbundle));
 
         time = extras.getBoolean(getResources().getString(R.string.timekey), false);
+        cpu = extras.getBoolean(getResources().getString(R.string.cpu), false);
         boardSize = extras.getInt(getResources().getString(R.string.sizekey), 7);
         selectedtime = extras.getInt(getResources().getString(R.string.timespend), 25);
 
@@ -203,7 +204,7 @@ public class Game extends AppCompatActivity {
         if(state == State.RED){
             this.state = State.YELLOW;
             tornImage.setImageResource(R.drawable.y);
-            playOpponent();
+            if(cpu) playOpponent();
         }else{
             this.state = State.RED;
             tornImage.setImageResource(R.drawable.r);

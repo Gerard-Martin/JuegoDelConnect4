@@ -48,4 +48,5 @@
     <string name="tempsinici" formatted="false">Temps des del inici: %d segons</string>
     <string name="board">Graella</string>
     <string name="state">Estat</string>
+    <string name="cpu">CPU</string>
 </resources>

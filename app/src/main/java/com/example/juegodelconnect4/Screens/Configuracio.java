@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.NumberPicker;
 import android.widget.SeekBar;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -59,7 +60,7 @@ public class Configuracio extends AppCompatActivity {
 
     public void comencar(View view) {
         EditText aliasc = findViewById(R.id.aliasc);
-        //SeekBar grid = findViewById(R.id.sb);
+        Switch cpu = findViewById(R.id.cpu);
         CheckBox time = findViewById(R.id.checkBox);
         if(TextUtils.isEmpty(aliasc.getText().toString())){
             aliasc.setError(getResources().getString(R.string.nomerror));
@@ -70,6 +71,7 @@ public class Configuracio extends AppCompatActivity {
             extras.putInt(getResources().getString(R.string.sizekey), size);
             extras.putBoolean(getResources().getString(R.string.timekey), time.isChecked());
             extras.putInt(getResources().getString(R.string.timespend), selected);
+            extras.putBoolean(getResources().getString(R.string.cpu), cpu.isChecked());
             in.putExtra(getResources().getString(R.string.extrasbundle), extras);
             startActivity(in);
             finish();
