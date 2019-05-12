@@ -67,11 +67,9 @@
             android:id="@+id/c1"
             android:gravity="bottom"
             android:layout_height="0dp"
-            android:layout_marginBottom="15dp"
             android:layout_weight="2">
             <GridView
                 android:id="@+id/buttongrid"
-                android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
