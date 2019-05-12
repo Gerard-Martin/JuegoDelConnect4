@@ -294,11 +294,7 @@ public class Game extends AppCompatActivity {
             Toast.makeText(this, "No hi ha partides per recuperar", Toast.LENGTH_LONG).show();
         }
         if(!cpu){
-            if(index%2 != 0){
-                state = State.RED;
-            }else{
-                state = State.YELLOW;
-            }
+            toggleTurn();
         }
     }
 
@@ -319,11 +315,7 @@ public class Game extends AppCompatActivity {
             Toast.makeText(this, "No es pot refer cap acció", Toast.LENGTH_LONG).show();
         }
         if(!cpu){
-            if(index%2 != 0){
-                state = State.RED;
-            }else{
-                state = State.YELLOW;
-            }
+            toggleTurn();
         }
     }
 
