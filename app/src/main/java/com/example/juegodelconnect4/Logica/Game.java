@@ -290,12 +290,13 @@ public class Game extends AppCompatActivity {
             }
             gridview.setAdapter(table);
             gridview.setNumColumns(boardSize);
+            if(!cpu){
+                toggleTurn();
+            }
         } else {
             Toast.makeText(this, "No hi ha partides per recuperar", Toast.LENGTH_LONG).show();
         }
-        if(!cpu){
-            toggleTurn();
-        }
+
     }
 
 
@@ -311,11 +312,11 @@ public class Game extends AppCompatActivity {
             }
             gridview.setAdapter(table);
             gridview.setNumColumns(boardSize);
+            if(!cpu){
+                toggleTurn();
+            }
         } else {
             Toast.makeText(this, "No es pot refer cap acció", Toast.LENGTH_LONG).show();
-        }
-        if(!cpu){
-            toggleTurn();
         }
     }
 
