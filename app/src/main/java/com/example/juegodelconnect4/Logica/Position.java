@@ -2,7 +2,6 @@ package com.example.juegodelconnect4.Logica;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
-import static java.lang.Math.sqrt;
 
 public class Position{
 

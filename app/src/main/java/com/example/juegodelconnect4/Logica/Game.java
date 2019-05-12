@@ -24,9 +24,8 @@ import java.util.List;
 
 
 public class Game extends AppCompatActivity {
-    State state = State.RED;
+    protected State state = State.RED;
     private final int toWin = 4;
-    private boolean hasWinner;
     private int index = 0;
     private List<Board> saved = new ArrayList<>();
 
@@ -65,8 +64,6 @@ public class Game extends AppCompatActivity {
             expendtime += 1;
             if(selectedtime == 0 && time) mHandler.sendEmptyMessage(0);
             else mHandler.postDelayed(this, 1000);
-            //if(!time)timertext.setText(String.valueOf(expendtime) + getResources().getString(R.string.tformat));
-            //else
             if(selectedtime >= 0) timertext.setText(String.valueOf(selectedtime) +
                     getResources().getString(R.string.tformat));
         }
@@ -74,7 +71,6 @@ public class Game extends AppCompatActivity {
     private Runnable oponentTask = new Runnable() {
         @Override
         public void run() {
-
             int column = rand.nextInt(boardSize);
             Position oponentPos = board.occupyCell(column, state);
             while(oponentPos == null && board.hasValidMoves()){
@@ -84,7 +80,6 @@ public class Game extends AppCompatActivity {
             table.notifyDataSetChanged();
             checkFinalPartida(oponentPos);
             toggleTurn();
-            //mHandler.post(timertask);
             return;
         }
     };
@@ -108,7 +103,7 @@ public class Game extends AppCompatActivity {
         buttongrid = (GridView) findViewById(R.id.buttongrid);
         timertext = (TextView) findViewById(R.id.timertext);
         tornImage = (ImageView) findViewById(R.id.ficha);
-        c1 = (LinearLayout) findViewById(R.id.c1);
+        this.c1 = (LinearLayout) findViewById(R.id.c1);
         g1 = (LinearLayout) findViewById(R.id.g1);
 
         if(time) timertext.setTextColor(Color.RED);
@@ -183,7 +178,7 @@ public class Game extends AppCompatActivity {
                     buttongrid.setHorizontalSpacing(boardDimen- Math.max(width, height));
                 }
                 gridview.setAdapter(table);
-                tableRow = new TableRow(getApplicationContext(), board, Game.this, boardDimen);
+                tableRow = new TableRow(getApplicationContext(), Game.this, boardDimen);
                 tableRow.notifyDataSetChanged();
                 if (boardDimen != width){
                     gridview.setHorizontalSpacing(boardDimen- Math.max(width, height));
@@ -199,8 +194,6 @@ public class Game extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     public void time(){
         try{
-            //if(!time)timertext.setText(String.valueOf(expendtime) + getResources().getString(R.string.tformat));
-            //else
             if(selectedtime >= 0) timertext.setText(String.valueOf(selectedtime) +
                     getResources().getString(R.string.tformat));
             mHandler.removeCallbacks(timertask);
@@ -213,18 +206,21 @@ public class Game extends AppCompatActivity {
 **************************Game Logic*************************************
 */
     //public Game(int size, int toWin) {  }
-    //  getters and setters
-    int heuristic(){
-        return 0;
+    int getBoardSize(){
+        return board.getSize();
     }
-    void playOpponent() {
-        // Controla on farà el següent moviment la CPU, primer serà aleatori i després s'implementara una heurística.
-        //mHandler.removeCallbacks(timertask);
-        mHandler.postDelayed(oponentTask, 1000);
+    /*int heuristic(){
+        return 0;
+    }*/
 
+    void playOpponent() {
+        // Controla on farà el següent moviment la CPU, en una primera versío serà aleatori.
+        // S'estableix l'operació mitjançant el handler per tal de fer la cpu concurrent i millorar la seva gestió
+        mHandler.postDelayed(oponentTask, 1000);
     }
 
     void toggleTurn() {
+        // Gestiona el canvi de torn.
         if(state == State.RED){
             this.state = State.YELLOW;
             tornImage.setImageResource(R.drawable.y);
@@ -235,10 +231,10 @@ public class Game extends AppCompatActivity {
         }
         tableRow.notifyDataSetChanged();
     }
+
     void manageTime() {
         // Es el primer que es comprovara quan es faci un moviment, si es controla el temps i s'ha excedit, s'acaba la partida.
         if(time){
-            // Gestionar-ho d'alguna forma amb el handler
             extras.putString(getResources().getString(R.string.fin),
                     getResources().getString(R.string.timespend));
             acabament();
@@ -250,8 +246,6 @@ public class Game extends AppCompatActivity {
         if (occupyPos != null) {
             addBoard(new Board(board));
             table.notifyDataSetChanged();
-            //System.out.println("maxconnectec " + board.maxConnected(occupyPos));
-            //if(checkForFinish(occupyPos))//si checkForFinish comencem tot el procés per anar a Resultat
             checkFinalPartida(occupyPos);
             toggleTurn();
         } else {
@@ -260,6 +254,7 @@ public class Game extends AppCompatActivity {
     }
 
     private void checkFinalPartida(Position pos){
+        // Comprova totes les possibilitats de que la partida hagi finalitzat, un cop s'ha realitzat un moviment.
         if(board.maxConnected(pos) == toWin){
             if(state == State.RED) extras.putString(getResources().getString(R.string.fin),
                     getResources().getString(R.string.guanyat));

@@ -20,8 +20,6 @@ import com.example.juegodelconnect4.R;
 
 public class Configuracio extends AppCompatActivity {
     private int size = 7;
-    //public String alias;
-    //public boolean timer;
     private int selected = 25;
 
 
@@ -63,7 +61,7 @@ public class Configuracio extends AppCompatActivity {
         EditText aliasc = findViewById(R.id.aliasc);
         Switch cpu = findViewById(R.id.cpu);
         CheckBox time = findViewById(R.id.checkBox);
-        //Switch switchbtn = findViewById(R.id.checkBox1);
+
         if(TextUtils.isEmpty(aliasc.getText().toString())){
             aliasc.setError(getResources().getString(R.string.nomerror));
         }else {

@@ -1,6 +1,5 @@
 package com.example.juegodelconnect4.Logica;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -12,7 +11,6 @@ public class Cell implements Parcelable {
     private static final char EMPTY = '.';
 
     private char state;
-    //private State player;
 
     private Cell(char state) {
         this.state = state;
@@ -51,17 +49,11 @@ public class Cell implements Parcelable {
 
     void setYellow() {
         this.state=YELLOW;
-        //this.player = State.YELLOW;
     }
 
     void setEmpty() {
         this.state=EMPTY;
-        //this.player = State.EMPTY;
     }
-
-    /*void setPlayer(State player){
-        if(player != null) this.player = player;
-    }*/
 
     public static final Parcelable.Creator<Cell> CREATOR = new Parcelable.Creator<Cell>() {
         @Override
