@@ -84,7 +84,7 @@ public class Game extends AppCompatActivity {
             table.notifyDataSetChanged();
             checkFinalPartida(oponentPos);
             toggleTurn();
-            mHandler.post(timertask);
+            //mHandler.post(timertask);
             return;
         }
     };
@@ -219,7 +219,7 @@ public class Game extends AppCompatActivity {
     }
     void playOpponent() {
         // Controla on farà el següent moviment la CPU, primer serà aleatori i després s'implementara una heurística.
-        mHandler.removeCallbacks(timertask);
+        //mHandler.removeCallbacks(timertask);
         mHandler.postDelayed(oponentTask, 1000);
 
     }
