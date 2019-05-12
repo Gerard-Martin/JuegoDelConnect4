@@ -244,10 +244,10 @@ public class Game extends AppCompatActivity {
     void drop(int col){
         Position occupyPos = board.occupyCell(col, state);
         if (occupyPos != null) {
+            addBoard(new Board(board));
             table.notifyDataSetChanged();
             checkFinalPartida(occupyPos);
             toggleTurn();
-            addBoard(board);
         } else {
             Toast.makeText(this, getResources().getString(R.string.fullcol), Toast.LENGTH_SHORT).show();
         }
@@ -296,6 +296,7 @@ public class Game extends AppCompatActivity {
         } else {
             Toast.makeText(this, "No hi ha partides per recuperar", Toast.LENGTH_LONG).show();
         }
+
     }
 
 
