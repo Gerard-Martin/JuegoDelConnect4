@@ -52,10 +52,12 @@ public class TableRow extends BaseAdapter {
             btn.setScaleType(ImageButton.ScaleType.FIT_XY);
             btn.setBackgroundColor(context.getColor(R.color.transparent));
             btn.setPadding(15, 15, 15, 15);
-            btn.setImageResource(R.drawable.r);
         } else {
             btn = (ImageButton) convertView;
         }
+
+        if(game.state == State.RED) btn.setImageResource(R.drawable.r);
+        else btn.setImageResource(R.drawable.y);
 
         btn.setOnClickListener(new View.OnClickListener()
         {

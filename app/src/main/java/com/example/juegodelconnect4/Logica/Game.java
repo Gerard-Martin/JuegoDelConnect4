@@ -130,6 +130,7 @@ public class Game extends AppCompatActivity {
         extras = savedInstanceState.getBundle(getResources().getString(R.string.extrasbundle));
         state = State.valueOf(savedInstanceState.getString(getResources().getString(R.string.state)));
         saved = savedInstanceState.getParcelableArrayList(getResources().getString(R.string.list));
+        index = savedInstanceState.getInt(getResources().getString(R.string.indexlist));
 
         timertext.setText(String.valueOf((selectedtime >= 0) ? selectedtime : 0) +
                 getResources().getString(R.string.tformat));
@@ -152,6 +153,7 @@ public class Game extends AppCompatActivity {
         outState.putBundle(getResources().getString(R.string.extrasbundle), extras);
         outState.putString(getResources().getString(R.string.state), state.toString());
         outState.putParcelableArrayList(getResources().getString(R.string.list), (ArrayList<? extends Parcelable>) saved);
+        outState.putInt(getResources().getString(R.string.indexlist), index);
     }
 
     public void init(){
@@ -231,6 +233,7 @@ public class Game extends AppCompatActivity {
             this.state = State.RED;
             tornImage.setImageResource(R.drawable.r);
         }
+        tableRow.notifyDataSetChanged();
     }
     void manageTime() {
         // Es el primer que es comprovara quan es faci un moviment, si es controla el temps i s'ha excedit, s'acaba la partida.
