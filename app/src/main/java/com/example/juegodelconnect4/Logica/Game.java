@@ -79,6 +79,7 @@ public class Game extends AppCompatActivity {
             }
             table.notifyDataSetChanged();
             checkFinalPartida(oponentPos);
+            addBoard(new Board(board));
             toggleTurn();
             return;
         }
@@ -244,9 +245,9 @@ public class Game extends AppCompatActivity {
     void drop(int col){
         Position occupyPos = board.occupyCell(col, state);
         if (occupyPos != null) {
-            addBoard(new Board(board));
             table.notifyDataSetChanged();
             checkFinalPartida(occupyPos);
+            if(!cpu) addBoard(new Board(board));
             toggleTurn();
         } else {
             Toast.makeText(this, getResources().getString(R.string.fullcol), Toast.LENGTH_SHORT).show();
@@ -283,13 +284,13 @@ public class Game extends AppCompatActivity {
             index--;
             this.board = new Board(saved.get(index));
             table = new Table(getApplicationContext(), this.board, boardDimen);
+            gridview.setAdapter(table);
+            gridview.setNumColumns(boardSize);
             table.notifyDataSetChanged();
             if (boardDimen != width){
                 gridview.setHorizontalSpacing(boardDimen- Math.max(width, height));
                 buttongrid.setHorizontalSpacing(boardDimen- Math.max(width, height));
             }
-            gridview.setAdapter(table);
-            gridview.setNumColumns(boardSize);
             if(!cpu){
                 toggleTurn();
             }
@@ -305,13 +306,13 @@ public class Game extends AppCompatActivity {
             index++;
             this.board = new Board(saved.get(index));
             table = new Table(getApplicationContext(), this.board, boardDimen);
+            gridview.setAdapter(table);
+            gridview.setNumColumns(boardSize);
             table.notifyDataSetChanged();
             if (boardDimen != width){
                 gridview.setHorizontalSpacing(boardDimen- Math.max(width, height));
                 buttongrid.setHorizontalSpacing(boardDimen- Math.max(width, height));
             }
-            gridview.setAdapter(table);
-            gridview.setNumColumns(boardSize);
             if(!cpu){
                 toggleTurn();
             }
