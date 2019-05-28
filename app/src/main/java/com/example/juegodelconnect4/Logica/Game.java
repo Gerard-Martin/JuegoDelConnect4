@@ -1,12 +1,14 @@
 package com.example.juegodelconnect4.Logica;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Bundle;
 import android.os.Build;
 import android.os.Message;
 import android.os.Parcelable;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.GridView;
@@ -42,8 +44,7 @@ public class Game extends AppCompatActivity {
     private int boardDimen, boardSize;
     private int width, height;
 
-    private Intent in;
-    private Bundle extras;
+    private Bundle extras = new Bundle();
     private TextView timertext;
     private ImageView tornImage;
 
@@ -92,13 +93,11 @@ public class Game extends AppCompatActivity {
 
         this.state = State.RED;
 
-        in = getIntent();
-        extras = in.getBundleExtra(getResources().getString(R.string.extrasbundle));
-
-        time = extras.getBoolean(getResources().getString(R.string.timekey), false);
-        cpu = extras.getBoolean(getResources().getString(R.string.cpu), false);
-        boardSize = extras.getInt(getResources().getString(R.string.sizekey), 7);
-        selectedtime = extras.getInt(getResources().getString(R.string.timespend), 25);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boardSize = Integer.parseInt(prefs.getString(getResources().getString(R.string.midakey), "7"));
+        cpu = prefs.getBoolean(getResources().getString(R.string.modekey), false);
+        time = prefs.getBoolean(getResources().getString(R.string.timekey), false);
+        selectedtime =  Integer.parseInt(prefs.getString(getResources().getString(R.string.tempskey), "25"));
 
         gridview = (GridView) findViewById(R.id.gridView);
         buttongrid = (GridView) findViewById(R.id.buttongrid);

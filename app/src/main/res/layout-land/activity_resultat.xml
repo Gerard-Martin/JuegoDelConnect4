@@ -5,13 +5,12 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:paddingLeft="16dp"
-    android:gravity="center"
     android:paddingRight="16dp" >
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="3"
+        android:layout_width="0dip"
+        android:orientation="vertical"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_weight="1">
         <TextView
             android:id="@+id/textView"
             android:textSize="@dimen/ts"
@@ -24,10 +23,9 @@
             android:text="@string/res" />
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:id="@+id/scroll"
-            android:fadeScrollbars="false"
-            android:layout_weight="1">
+            android:fadeScrollbars="false">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
@@ -35,6 +33,7 @@
                 <TextView
                     android:id="@+id/dia"
                     android:fontFamily="sans-serif-thin"
+                    android:textSize="@dimen/tsm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/diai" />
@@ -42,15 +41,16 @@
                     android:id="@+id/da"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/tssm"
                     android:ems="@integer/ems"
                     android:clickable="false"
                     android:focusable="false"
                     android:inputType="none" />
                 <TextView
                     android:id="@+id/val"
-                    android:layout_marginTop="@dimen/mupm"
                     android:fontFamily="sans-serif-thin"
                     android:layout_width="wrap_content"
+                    android:textSize="@dimen/tsm"
                     android:layout_height="wrap_content"
                     android:text="@string/vallog" />
                 <EditText
@@ -58,14 +58,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="@integer/ems"
+                    android:textSize="@dimen/tssm"
                     android:clickable="false"
                     android:focusable="false"
                     android:inputType="textMultiLine|none" />
                 <TextView
                     android:id="@+id/emt"
-                    android:layout_marginTop="@dimen/mupm"
                     android:fontFamily="sans-serif-thin"
                     android:layout_width="wrap_content"
+                    android:textSize="@dimen/tsm"
                     android:layout_height="wrap_content"
                     android:text="@string/emto" />
 
@@ -73,6 +74,7 @@
                     android:id="@+id/em"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:textSize="@dimen/tssm"
                     android:ems="@integer/ems"
                     android:inputType="textPersonName"
                     android:text="@string/correu" />
@@ -80,34 +82,56 @@
         </ScrollView>
     </LinearLayout>
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_margin="@dimen/mupm"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <Button
-            android:id="@+id/enviar"
-            android:onClick="enviarPartida"
-            android:layout_gravity="center"
-            android:drawableLeft="@drawable/send"
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/enviaremail" />
-        <Button
-            android:id="@+id/nova"
-            android:onClick="novaPartida"
-            android:layout_gravity="center"
-            android:drawableLeft="@drawable/images"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/nova"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:onClick="novaPartida"
+                android:text="@string/nova" />
+            <Button
+                android:id="@+id/enviar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/send"
+                android:onClick="enviarPartida"
+                android:text="@string/enviaremail" />
+        </LinearLayout>
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nova" />
-        <Button
-            android:id="@+id/sortir"
-            android:layout_gravity="center"
-            android:onClick="sortir"
-            android:drawableLeft="@drawable/sortir"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sortir" />
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/sortir"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/sortir"
+                android:onClick="sortir"
+                android:text="@string/sortir" />
+
+            <Button
+                android:id="@+id/consultar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:onClick="consultar"
+                android:text="@string/cons"
+                android:textSize="@dimen/tsm" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>
