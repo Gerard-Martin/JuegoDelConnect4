@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+    <TextView
+        android:id="@+id/textView"
+        android:textSize="@dimen/ts"
+        android:layout_marginTop="@dimen/mup"
+        android:layout_marginBottom="@dimen/mup"
+        android:fontFamily="sans-serif-thin"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/res" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/scroll"
+        android:fadeScrollbars="false"
+        android:layout_weight="1">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/dia"
+                android:fontFamily="sans-serif-thin"
+                android:textSize="@dimen/tsm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/diai" />
+            <EditText
+                android:id="@+id/da"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tsm"
+                android:ems="@integer/ems"
+                android:clickable="false"
+                android:focusable="false"
+                android:inputType="none" />
+            <TextView
+                android:id="@+id/val"
+                android:textSize="@dimen/tsm"
+                android:fontFamily="sans-serif-thin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/vallog" />
+            <EditText
+                android:id="@+id/vall"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tssm"
+                android:ems="@integer/ems"
+                android:clickable="false"
+                android:focusable="false"
+                android:inputType="textMultiLine|none" />
+            <TextView
+                android:id="@+id/emt"
+                android:fontFamily="sans-serif-thin"
+                android:textSize="@dimen/tsm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/emto" />
+
+            <EditText
+                android:id="@+id/em"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tsm"
+                android:ems="@integer/ems"
+                android:inputType="textPersonName"
+                android:text="@string/correu" />
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/nova"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="novaPartida"
+            android:text="@string/nova" />
+        <Button
+            android:id="@+id/enviar"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/send"
+            android:onClick="enviarPartida"
+            android:text="@string/enviaremail" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/sortir"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/sortir"
+            android:onClick="sortir"
+            android:text="@string/sortir" />
+        <Button
+            android:id="@+id/consultar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:onClick="consultar"
+            android:text="@string/cons"
+            android:textSize="@dimen/tsm" />
+    </LinearLayout>
+</LinearLayout>
