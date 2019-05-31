@@ -83,49 +83,13 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="3dp"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:id="@+id/c1"
+        android:layout_weight="1"
+        android:gravity="top"
+        android:orientation="horizontal">
+        <fragment
+            android:id="@+id/gridfragm"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="1.2"
-            android:gravity="bottom"
-            android:orientation="vertical">
-
-            <GridView
-                android:id="@+id/buttongrid"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:gravity="center"
-                android:horizontalSpacing="-220dp"
-                android:stretchMode="columnWidth" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/g1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="8"
-            android:gravity="bottom"
-            android:orientation="vertical">
-
-            <GridView
-                android:id="@+id/gridView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:horizontalSpacing="-220dp"
-                android:stretchMode="columnWidth" />
-        </LinearLayout>
-
+            android:layout_height="match_parent"
+            class="com.example.juegodelconnect4.Fragments.GridFrag"/>
     </LinearLayout>
 </LinearLayout>
