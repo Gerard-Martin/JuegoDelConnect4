@@ -81,4 +81,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="initlog">LOG…\nAlias = %s, Mida Graella = %d\n%s\n</string>
+    <string name="log">log</string>
+    <string name="blog">Temps in. tirada = %s scs; Temps fin. tirada = %s scs\n</string>
+    <string name="tres">Temps restant = %d\n</string>
+    <string name="casoc">Casella ocupada: (%d,%d)\n</string>
+    <string name="troig">Torn del jugador ROIG\n</string>
+    <string name="tgroc">Torn del jugador GROC\n</string>
 </resources>

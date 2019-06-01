@@ -18,8 +18,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.view.ViewTreeObserver;
+
+import com.example.juegodelconnect4.Fragments.LogFrag;
 import com.example.juegodelconnect4.R;
 import com.example.juegodelconnect4.Screens.Resultat;
+
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +44,8 @@ public class Game extends AppCompatActivity {
     private Table table;
     private TableRow tableRow;
     private Board board;
+    private boolean fragment = false;
+    private TextView tv;
 
     boolean time, cpu;
     private int selectedtime;
@@ -47,6 +57,9 @@ public class Game extends AppCompatActivity {
     private Bundle extras = new Bundle();
     private TextView timertext;
     private ImageView tornImage;
+    private String alias = "";
+    private String log = "";
+    private String i, f;
 
     @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler(){
@@ -82,6 +95,7 @@ public class Game extends AppCompatActivity {
             checkFinalPartida(oponentPos);
             addBoard(new Board(board));
             toggleTurn();
+            i=new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(new Date().getTime()));
             return;
         }
     };
@@ -97,6 +111,7 @@ public class Game extends AppCompatActivity {
         boardSize = Integer.parseInt(prefs.getString(getResources().getString(R.string.midakey), "7"));
         cpu = prefs.getBoolean(getResources().getString(R.string.modekey), false);
         time = prefs.getBoolean(getResources().getString(R.string.timekey), false);
+        alias = prefs.getString(getResources().getString(R.string.aliaskey),"");
         selectedtime =  Integer.parseInt(prefs.getString(getResources().getString(R.string.tempskey), "25"));
 
         gridview = (GridView) findViewById(R.id.gridView);
@@ -126,7 +141,8 @@ public class Game extends AppCompatActivity {
         state = State.valueOf(savedInstanceState.getString(getResources().getString(R.string.state)));
         saved = savedInstanceState.getParcelableArrayList(getResources().getString(R.string.list));
         index = savedInstanceState.getInt(getResources().getString(R.string.indexlist));
-
+        log =savedInstanceState.getString(getResources().getString(R.string.log));
+        if(log != "" && fragment) tv.setText(log);
         timertext.setText(String.valueOf((selectedtime >= 0) ? selectedtime : 0) +
                 getResources().getString(R.string.tformat));
         if(state == State.RED){
@@ -149,6 +165,7 @@ public class Game extends AppCompatActivity {
         outState.putString(getResources().getString(R.string.state), state.toString());
         outState.putParcelableArrayList(getResources().getString(R.string.list), (ArrayList<? extends Parcelable>) saved);
         outState.putInt(getResources().getString(R.string.indexlist), index);
+        outState.putString(getResources().getString(R.string.log), log);
     }
 
     public void init(){
@@ -187,7 +204,15 @@ public class Game extends AppCompatActivity {
                 buttongrid.setAdapter(tableRow);
             }
         });
-
+        LogFrag lg = (LogFrag) getSupportFragmentManager().findFragmentById(R.id.logfrag);
+        if(lg.isInLayout()){
+            fragment = true;
+            tv = findViewById(R.id.logreg);
+            log += buildInit();
+            log += '\n';
+            tv.setText(log);
+        }
+        i = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(new Date().getTime()));
     }
 
     // state members related with time
@@ -229,6 +254,9 @@ public class Game extends AppCompatActivity {
             this.state = State.RED;
             tornImage.setImageResource(R.drawable.r);
         }
+        if(!cpu){
+            i=new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(new Date().getTime()));
+        }
         tableRow.notifyDataSetChanged();
     }
 
@@ -247,6 +275,11 @@ public class Game extends AppCompatActivity {
             table.notifyDataSetChanged();
             checkFinalPartida(occupyPos);
             if(!cpu) addBoard(new Board(board));
+            f = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(new Date().getTime()));
+            if(fragment){
+                buildLog(occupyPos, i, f);
+                tv.setText(log);
+            }
             toggleTurn();
         } else {
             Toast.makeText(this, getResources().getString(R.string.fullcol), Toast.LENGTH_SHORT).show();
@@ -332,5 +365,23 @@ public class Game extends AppCompatActivity {
             temp.add(new Board(saved.get(i)));
         }
         saved = temp;
+    }
+
+    public String buildInit(){
+        if(time) return String.format(getString(R.string.initlog), alias, boardSize, "Amb control de temps");
+        else return String.format(getString(R.string.initlog), alias, boardSize, "Sense control de temps");
+    }
+
+    public void buildLog(Position pos, String in, String fi){
+        String blog = "";
+        if(!cpu){
+            if(state == State.RED) blog += getString(R.string.troig);
+            else blog += getString(R.string.tgroc);
+        }
+        blog += String.format(getString(R.string.blog), in, fi);
+        if(time) blog += String.format(getString(R.string.tres), expendtime);
+        blog += String.format(getString(R.string.casoc), pos.getRow(), pos.getColumn());
+        blog += '\n';
+        log += blog;
     }
 }
