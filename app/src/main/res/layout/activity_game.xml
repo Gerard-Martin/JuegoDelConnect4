@@ -60,11 +60,11 @@
         android:layout_height="0dp"
         android:gravity="bottom"
         android:layout_marginBottom="@dimen/mupm"
-        android:layout_weight="12">
+        android:layout_weight="10">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="30"
+            android:layout_weight="12"
             android:gravity="top"
             android:orientation="horizontal">
             <fragment
@@ -73,28 +73,11 @@
                 android:layout_height="match_parent"
                 class="com.example.juegodelconnect4.Fragments.GridFrag"/>
         </LinearLayout>
-        <LinearLayout
+        <fragment
+            android:id="@+id/logfrag"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
-            android:orientation="horizontal"
-            android:gravity="center">
-            <Button
-                android:id="@+id/un"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:onClick="unDo"
-                android:text="@string/undo" />
-            <Button
-                android:id="@+id/re"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:onClick="reDo"
-                android:text="@string/redo" />
-         </LinearLayout>
+            android:layout_weight="5"
+            class="com.example.juegodelconnect4.Fragments.LogFrag"/>
     </LinearLayout>
 </LinearLayout>

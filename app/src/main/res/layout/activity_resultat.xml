@@ -53,7 +53,7 @@
                 android:id="@+id/vall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/tssm"
+                android:textSize="@dimen/tsm"
                 android:ems="@integer/ems"
                 android:clickable="false"
                 android:focusable="false"
@@ -118,7 +118,6 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:onClick="consultar"
-            android:text="@string/cons"
-            android:textSize="@dimen/tsm" />
+            android:text="@string/cons" />
     </LinearLayout>
 </LinearLayout>

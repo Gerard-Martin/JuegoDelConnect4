@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
+import android.preference.ListPreference;
+import android.preference.Preference;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.juegodelconnect4.Database.GameSQLiteHelper;
 import com.example.juegodelconnect4.Logica.Game;
 import com.example.juegodelconnect4.R;
 
@@ -34,6 +37,7 @@ public class Resultat extends AppCompatActivity {
     private String date;
     private String fin;
     private String logc;
+    private boolean timer;
 
     private Bundle extras;
 
@@ -50,7 +54,8 @@ public class Resultat extends AppCompatActivity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         alias = prefs.getString(getResources().getString(R.string.aliaskey),"");
         total = extras.getInt(getResources().getString(R.string.total), 0);
-        size = extras.getInt(getResources().getString(R.string.sizekey), 0);
+        size = Integer.parseInt(prefs.getString(getResources().getString(R.string.midakey), "7"));
+        timer = prefs.getBoolean(getResources().getString(R.string.timekey), false);
 
         date = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
         ti.setText(date);
@@ -58,6 +63,7 @@ public class Resultat extends AppCompatActivity {
         customButtons();
         if(fin == null){fin = new String();}
         compose();
+        if(savedInstanceState == null) writeDB();
     }
 
     @SuppressLint("IntentReset")
@@ -155,5 +161,14 @@ public class Resultat extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    public void writeDB(){
+        GameSQLiteHelper SQLHelper = new GameSQLiteHelper(this.getApplicationContext());
+
+        SQLHelper.addScore(alias, date, size, timer ? 1: 0, Integer.toString(total), fin);
+        Toast toast = Toast.makeText(this,getString(R.string.guardatdata), Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP, 0, 0);
+        toast.show();
     }
 }

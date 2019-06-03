@@ -2,6 +2,7 @@ package com.example.juegodelconnect4.Screens;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.ListPreference;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 
+import com.example.juegodelconnect4.Database.AccessBDActivity;
 import com.example.juegodelconnect4.Logica.Game;
 import com.example.juegodelconnect4.R;
 
@@ -32,10 +34,16 @@ public class Main extends AppCompatActivity {
         finish();
     }
 
+    public void consultar(View view){
+        startActivity(new Intent(this, AccessBDActivity.class));
+    }
+
 
     public void sortir(View view) {
         finish();
+        System.exit(0);
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -56,4 +64,5 @@ public class Main extends AppCompatActivity {
 
         }
     }
+
 }

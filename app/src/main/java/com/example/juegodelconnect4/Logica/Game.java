@@ -57,7 +57,7 @@ public class Game extends AppCompatActivity {
     private Bundle extras = new Bundle();
     private TextView timertext;
     private ImageView tornImage;
-    private String alias = "";
+    private String alias;
     private String log = "";
     private String i, f;
 
