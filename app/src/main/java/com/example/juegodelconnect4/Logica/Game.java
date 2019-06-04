@@ -204,13 +204,16 @@ public class Game extends AppCompatActivity {
                 buttongrid.setAdapter(tableRow);
             }
         });
-        LogFrag lg = (LogFrag) getSupportFragmentManager().findFragmentById(R.id.logfrag);
-        if(lg.isInLayout()){
-            fragment = true;
-            tv = findViewById(R.id.logreg);
-            log += buildInit();
-            log += '\n';
-            tv.setText(log);
+        boolean tablet = getResources().getBoolean(R.bool.isTablet);
+        if(tablet) {
+            LogFrag lg = (LogFrag) getSupportFragmentManager().findFragmentById(R.id.logfrag);
+            if (lg.isInLayout()) {
+                fragment = true;
+                tv = findViewById(R.id.logreg);
+                log += buildInit();
+                log += '\n';
+                tv.setText(log);
+            }
         }
         i = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(new Date().getTime()));
     }

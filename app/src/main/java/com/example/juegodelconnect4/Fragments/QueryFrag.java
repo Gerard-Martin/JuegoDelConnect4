@@ -1,29 +1,31 @@
 package com.example.juegodelconnect4.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.view.View;
+import android.widget.ListView;
+import android.widget.SimpleCursorAdapter;
+/*import android.widget.Toast;
+import android.content.Intent;
+import android.widget.SearchView;
+import android.widget.AdapterView;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SearchView;
-import android.widget.SimpleCursorAdapter;
-import android.widget.Toast;
+import android.view.MenuItem;*/
 
 import com.example.juegodelconnect4.Database.GameSQLiteHelper;
 import com.example.juegodelconnect4.R;
+
 
 public class QueryFrag extends ListFragment {
     private SQLiteDatabase db;
     private GameSQLiteHelper SQLHelper;
     private SimpleCursorAdapter adapter;
+    private ConsultaListener listener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -34,8 +36,8 @@ public class QueryFrag extends ListFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-        registerForContextMenu(getListView());
+        //setHasOptionsMenu(true);
+        //registerForContextMenu(getListView());
         init();
     }
 
@@ -55,9 +57,29 @@ public class QueryFrag extends ListFragment {
     }
 
     @Override
+    public void onAttach(Context context){
+        super.onAttach(context);
+        try{
+            listener = (ConsultaListener) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException("must implement ConsultaListener");
+        }
+    }
+
+    public void setConsultaListener(ConsultaListener listener){
+        this.listener = listener;
+    }
+
+    public interface ConsultaListener{
+        void itemSelected(ListView l, View v, int position, long id);
+    }
+
+    @Override
     public void onListItemClick(ListView l, View v, int position, long id){
-        Toast toast = Toast.makeText(getActivity().getApplicationContext(),
+        /*Toast toast = Toast.makeText(getActivity().getApplicationContext(),
                 "itemList: "+position, Toast.LENGTH_SHORT);
-        toast.show();
+        toast.show();*/
+        //getActivity().startActivity(new Intent(getActivity().getApplicationContext(), DetailRegActivity.class));
+        listener.itemSelected(l,v,position,id);
     }
 }

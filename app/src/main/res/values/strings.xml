@@ -79,6 +79,7 @@
     <string name="undo">Undo</string>
     <string name="indexlist">Index List</string>
     <string name="guardatdata">Partida guardada</string>
+    <string name="detall">Detall</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

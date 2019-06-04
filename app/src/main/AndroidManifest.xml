@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Database.AccessBDActivity" android:label="Consultar"></activity>
+        <activity android:name=".Fragments.DetailRegActivity" android:label="Detall"></activity>
     </application>
 
 </manifest>
