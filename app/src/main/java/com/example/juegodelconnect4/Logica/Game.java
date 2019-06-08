@@ -95,7 +95,7 @@ public class Game extends AppCompatActivity {
             checkFinalPartida(oponentPos);
             addBoard(new Board(board));
             toggleTurn();
-            i=new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(new Date().getTime()));
+            i=new SimpleDateFormat("HH:mm:ss", new Locale("es", "ES")).format(new Date(new Date().getTime()));
             return;
         }
     };
@@ -215,7 +215,7 @@ public class Game extends AppCompatActivity {
                 tv.setText(log);
             }
         }
-        i = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(new Date().getTime()));
+        i=new SimpleDateFormat("HH:mm:ss", new Locale("es", "ES")).format(new Date(new Date().getTime()));
     }
 
     // state members related with time
@@ -258,7 +258,7 @@ public class Game extends AppCompatActivity {
             tornImage.setImageResource(R.drawable.r);
         }
         if(!cpu){
-            i=new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(new Date().getTime()));
+            i=new SimpleDateFormat("HH:mm:ss", new Locale("es", "ES")).format(new Date(new Date().getTime()));
         }
         tableRow.notifyDataSetChanged();
     }
@@ -278,7 +278,7 @@ public class Game extends AppCompatActivity {
             table.notifyDataSetChanged();
             checkFinalPartida(occupyPos);
             if(!cpu) addBoard(new Board(board));
-            f = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date(new Date().getTime()));
+            f=new SimpleDateFormat("HH:mm:ss", new Locale("es", "ES")).format(new Date(new Date().getTime()));
             if(fragment){
                 buildLog(occupyPos, i, f);
                 tv.setText(log);

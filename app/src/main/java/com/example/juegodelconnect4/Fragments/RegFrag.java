@@ -35,12 +35,13 @@ public class RegFrag extends Fragment {
         TextView timer = getView().findViewById(R.id.timer);
         TextView time = getView().findViewById(R.id.time);
         TextView result = getView().findViewById(R.id.result);
-
-        alias.setText(data[0]);
-        date.setText(data[1]);
-        size.setText(data[2]);
-        timer.setText(data[3]);
-        time.setText(data[4]);
+        if(data[0].equals("")) alias.setText(getString(R.string.noal));
+        else alias.setText(getString(R.string.al) + data[0]);
+        date.setText(getString(R.string.dat) + data[1]);
+        size.setText(getString(R.string.mg) + data[2]);
+        if(data[3].equals("0")) timer.setText(getString(R.string.notemps));
+        else timer.setText(getString(R.string.contemps));
+        time.setText(getString(R.string.temtot)+data[4]);
         result.setText(data[5]);
     }
 }

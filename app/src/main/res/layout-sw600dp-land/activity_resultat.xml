@@ -3,9 +3,14 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
     <TextView
         android:id="@+id/textView"
         android:textSize="@dimen/tm"
@@ -76,49 +81,41 @@
                 android:text="@string/correu" />
         </LinearLayout>
     </ScrollView>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:id="@+id/nova"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:onClick="novaPartida"
-            android:text="@string/nova" />
-        <Button
-            android:id="@+id/enviar"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:drawableLeft="@drawable/send"
-            android:onClick="enviarPartida"
-            android:text="@string/enviaremail" />
     </LinearLayout>
     <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="match_parent">
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_margin="@dimen/mupm"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/enviar"
+            android:onClick="enviarPartida"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/enviaremail" />
+        <Button
+            android:id="@+id/nova"
+            android:onClick="novaPartida"
+            android:layout_gravity="center"
+            android:drawableLeft="@drawable/images"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nova" />
         <Button
             android:id="@+id/sortir"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
-            android:drawableLeft="@drawable/sortir"
             android:onClick="sortir"
-            android:text="@string/sortir" />
-        <Button
-            android:id="@+id/consultar"
-            android:layout_width="0dp"
+            android:drawableLeft="@drawable/sortir"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:onClick="consultar"
-            android:text="@string/cons"
-            android:textSize="@dimen/tsm" />
+            android:text="@string/sortir" />
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

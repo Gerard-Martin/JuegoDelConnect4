@@ -91,4 +91,11 @@
     <string name="troig">Torn del jugador ROIG\n</string>
     <string name="tgroc">Torn del jugador GROC\n</string>
     <string name="query">SELECT  * FROM score</string>
+    <string name="mg">Mida de la graella: </string>
+    <string name="al">Alias: </string>
+    <string name="dat">Data: </string>
+    <string name="noal">Alias: No s\'ha definit un alias!</string>
+    <string name="notemps">No s\'ha marcat control de temps</string>
+    <string name="contemps">S\'ha marcat control de temps</string>
+    <string name="temtot">Temps total empleat: </string>
 </resources>

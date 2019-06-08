@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceManager;
@@ -27,7 +28,10 @@ import com.example.juegodelconnect4.Database.GameSQLiteHelper;
 import com.example.juegodelconnect4.Logica.Game;
 import com.example.juegodelconnect4.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class Resultat extends AppCompatActivity {
 
@@ -57,7 +61,7 @@ public class Resultat extends AppCompatActivity {
         size = Integer.parseInt(prefs.getString(getResources().getString(R.string.midakey), "7"));
         timer = prefs.getBoolean(getResources().getString(R.string.timekey), false);
 
-        date = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+        date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new Locale("es", "ES")).format(new Date(new Date().getTime()));
         ti.setText(date);
 
         customButtons();
@@ -167,8 +171,16 @@ public class Resultat extends AppCompatActivity {
         GameSQLiteHelper SQLHelper = new GameSQLiteHelper(this.getApplicationContext());
 
         SQLHelper.addScore(alias, date, size, timer ? 1: 0, Integer.toString(total), fin);
-        Toast toast = Toast.makeText(this,getString(R.string.guardatdata), Toast.LENGTH_SHORT);
-        toast.setGravity(Gravity.TOP, 0, 0);
-        toast.show();
+        new CountDownTimer(500, 500) {
+
+            public void onTick(long millisUntilFinished) {
+            }
+            public void onFinish() {
+                Toast toast = Toast.makeText(Resultat.this,getString(R.string.guardatdata), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+
+        }.start();
     }
 }
