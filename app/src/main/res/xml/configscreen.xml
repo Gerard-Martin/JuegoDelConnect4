@@ -15,7 +15,8 @@
             android:entryValues="@array/mides"
             android:key="@string/midakey"
             android:summary="@string/descmida"
-            android:title="@string/midagraella" />
+            android:title="@string/midagraella"
+            android:defaultValue="7"/>
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -23,7 +24,8 @@
         <CheckBoxPreference
             android:key="@string/timekey"
             android:summary="@string/marcar"
-            android:title="@string/controldetemps" />
+            android:title="@string/controldetemps"
+            android:defaultValue="false"/>
 
         <EditTextPreference
             android:defaultValue="25"

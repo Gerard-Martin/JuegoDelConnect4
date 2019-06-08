@@ -67,8 +67,10 @@ public class Resultat extends AppCompatActivity {
 
         customButtons();
         if(fin == null)fin = new String();
-        if(savedInstanceState == null) writeDB();
-        compose();
+        if(savedInstanceState == null) {
+            writeDB();
+            compose();
+        }
     }
 
     @SuppressLint("IntentReset")
