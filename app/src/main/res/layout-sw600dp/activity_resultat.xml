@@ -8,7 +8,7 @@
     android:paddingRight="16dp" >
     <TextView
         android:id="@+id/textView"
-        android:textSize="@dimen/ts"
+        android:textSize="@dimen/tm"
         android:layout_marginTop="@dimen/mup"
         android:layout_marginBottom="@dimen/mup"
         android:fontFamily="sans-serif-thin"
@@ -53,7 +53,7 @@
                 android:id="@+id/vall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/tssm"
+                android:textSize="@dimen/tsm"
                 android:ems="@integer/ems"
                 android:clickable="false"
                 android:focusable="false"

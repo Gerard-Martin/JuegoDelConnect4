@@ -6,33 +6,33 @@
     android:orientation="vertical"
     android:gravity="center"
     xmlns:android="http://schemas.android.com/apk/res/android">
-        <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
-            android:paddingLeft="16dp"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:paddingRight="16dp"  >
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="@dimen/size"
-                android:layout_marginTop="@dimen/mup"
-                android:layout_marginBottom="@dimen/mup"
-                android:layout_height="@dimen/size"
-                app:srcCompat="@mipmap/icon" />
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:paddingLeft="16dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:paddingRight="16dp"  >
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/size"
+            android:layout_marginTop="@dimen/mup"
+            android:layout_marginBottom="@dimen/mup"
+            android:layout_height="@dimen/size"
+            app:srcCompat="@mipmap/icon" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/mup"
-                android:text="@string/app_name"
-                android:textSize="@dimen/mupm"
-                app:fontFamily="sans-serif-thin" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/mup"
+            android:text="@string/app_name"
+            android:textSize="@dimen/mupm"
+            app:fontFamily="sans-serif-thin" />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

@@ -1,7 +1,7 @@
 <resources>
     <dimen name="size">200dp</dimen>
     <dimen name="mup">10dp</dimen>
-    <dimen name="mupm">10dp</dimen>
+    <dimen name="mupm">30dp</dimen>
     <dimen name="horz">-220dp</dimen>
     <dimen name="p">40dp</dimen>
     <dimen name="t">40sp</dimen>
