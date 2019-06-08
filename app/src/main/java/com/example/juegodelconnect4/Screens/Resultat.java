@@ -42,6 +42,7 @@ public class Resultat extends AppCompatActivity {
     private String fin;
     private String logc;
     private boolean timer;
+    private boolean writeDB;
 
     private Bundle extras;
 
@@ -65,9 +66,9 @@ public class Resultat extends AppCompatActivity {
         ti.setText(date);
 
         customButtons();
-        if(fin == null){fin = new String();}
-        compose();
+        if(fin == null)fin = new String();
         if(savedInstanceState == null) writeDB();
+        compose();
     }
 
     @SuppressLint("IntentReset")
@@ -99,21 +100,21 @@ public class Resultat extends AppCompatActivity {
             imageToast(getResources().getString(R.string.emt), R.drawable.tie);
             logc = String.format(getResources().getString(R.string.base), alias, size, total)+'\n';
             logc += getResources().getString(R.string.emt);
-            imageToast(getResources().getString(R.string.emt), R.drawable.tie);
+            //imageToast(getResources().getString(R.string.emt), R.drawable.tie);
         }else{
             logc = String.format(getResources().getString(R.string.base), alias, size, total)+'\n';
             if(fin.equals(getResources().getString(R.string.guanyat))){
                 imageToast(getResources().getString(R.string.guanyat), R.drawable.win);
                 logc += getResources().getString(R.string.guanyat);
-                imageToast(getResources().getString(R.string.guanyat), R.drawable.win);
+                //imageToast(getResources().getString(R.string.guanyat), R.drawable.win);
             }else if(fin.equals(getResources().getString(R.string.perdut))){
                 imageToast(getResources().getString(R.string.perdut), R.drawable.lost);
                 logc += getResources().getString(R.string.perdut);
-                imageToast(getResources().getString(R.string.perdut), R.drawable.lost);
+                //imageToast(getResources().getString(R.string.perdut), R.drawable.lost);
             }else{
                 imageToast(getResources().getString(R.string.timespend), R.drawable.timer);
                 logc += getResources().getString(R.string.timespend);
-                imageToast(getResources().getString(R.string.timespend), R.drawable.timer);
+                //imageToast(getResources().getString(R.string.timespend), R.drawable.timer);
             }
         }
         log.setText(logc);
@@ -128,6 +129,9 @@ public class Resultat extends AppCompatActivity {
         image.setImageResource(d);
         TextView text = layout.findViewById(R.id.text);
         text.setText(s);
+        TextView textDB = layout.findViewById(R.id.textDB);
+        if(writeDB) textDB.setText(getString(R.string.guardatdata));
+        else textDB.setText(getString(R.string.errorguardat));
 
         Toast toast = new Toast(getApplicationContext());
         toast.setDuration(Toast.LENGTH_LONG);
@@ -170,8 +174,8 @@ public class Resultat extends AppCompatActivity {
     public void writeDB(){
         GameSQLiteHelper SQLHelper = new GameSQLiteHelper(this.getApplicationContext());
 
-        SQLHelper.addScore(alias, date, size, timer ? 1: 0, Integer.toString(total), fin);
-        new CountDownTimer(500, 500) {
+        writeDB = SQLHelper.addScore(alias, date, size, timer ? 1: 0, Integer.toString(total), fin);
+        /*new CountDownTimer(500, 500) {
 
             public void onTick(long millisUntilFinished) {
             }
@@ -181,6 +185,6 @@ public class Resultat extends AppCompatActivity {
                 toast.show();
             }
 
-        }.start();
+        }.start();*/
     }
 }

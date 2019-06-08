@@ -2,6 +2,8 @@ package com.example.juegodelconnect4.Screens;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
@@ -32,6 +34,18 @@ public class Configuracio extends Activity {
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     final String val = (String) newValue;
                     preference.setTitle(getResources().getString(R.string.midagraella) + val);
+                    return true;
+                }
+            });
+
+            final CheckBoxPreference timer = (CheckBoxPreference) findPreference(getResources().getString(R.string.timekey));
+            timer.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    if(!timer.isChecked()){
+                        EditTextPreference temps = (EditTextPreference) findPreference(getResources().getString(R.string.tempskey));
+                        temps.setText("25");
+                    }
                     return true;
                 }
             });

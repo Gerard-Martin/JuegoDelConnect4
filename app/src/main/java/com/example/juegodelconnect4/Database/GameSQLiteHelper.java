@@ -50,7 +50,8 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addScore(String alias, String date, int size, int timer, String time, String result){
+    public boolean addScore(String alias, String date, int size, int timer, String time, String result){
+        boolean state;
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -59,9 +60,13 @@ public class GameSQLiteHelper extends SQLiteOpenHelper {
         values.put(KEY_SIZE, size);
         values.put(KEY_TIMER, timer);
         if(timer == 1) values.put(KEY_TIME, time);
+        else values.put(KEY_TIME, "");
         values.put(KEY_RESULT, result);
 
-        db.insert(TABLE_SCORE, null, values);
+        if(db.insert(TABLE_SCORE, null, values) != -1) state = true;
+        else state = false;
+
         db.close();
+        return state;
     }
 }
