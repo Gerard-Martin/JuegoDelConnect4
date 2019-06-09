@@ -36,8 +36,10 @@ public class AccessBDActivity extends AppCompatActivity implements QueryFrag.Con
         super.onRestoreInstanceState(savedInstanceState);
         if(tablet){
             data = savedInstanceState.getStringArray(getResources().getString(R.string.data));
-            RegFrag reg = (RegFrag) getSupportFragmentManager().findFragmentById(R.id.regfrag);
-            reg.showInfo(data);
+            if(data != null) {
+                RegFrag reg = (RegFrag) getSupportFragmentManager().findFragmentById(R.id.regfrag);
+                reg.showInfo(data);
+            }
         }
     }
 
