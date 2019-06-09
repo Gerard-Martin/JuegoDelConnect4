@@ -16,13 +16,32 @@
     <string name="nomerror">"Ha d'introduir un nom d'usuari"</string>
     <string name="stablishedkey">"stablishedkey"</string>
     <string name="alias">Alias Identificatiu</string>
-    <string name="midagraella">Mida graella seleccionada: 7</string>
+    <string name="midagraella">"Mida graella seleccionada: "</string>
     <string name="controldetemps">Control de Temps: </string>
     <string name="jugarcpu">Jugar contra la CPU</string>
     <string name="configt">Temps a fixar pel temporitzador:</string>
+    <string name="marcar">Marqui-ho si desitja limitar el temps per dur a terme una partida.</string>
+    <string name="controldetempskey">temps</string>
+    <string name="segons">Introdueixi el nombre de segons desitjats</string>
+    <string name="tempskey">tempssegons</string>
+    <string name="segonstitle">Nombre de segons</string>
+    <string name="mode">Mode de partida</string>
+    <string name="modekey">mode</string>
+    <string name="cpudesc">Seleccioni en cas de voler jugar contra el dispositiu</string>
+    <string name="difdesc">Seleccioni el nivell de dificultat</string>
+    <string name="dificultatkey">dif</string>
+    <string name="difniv">Nivell de dificultat</string>
+    <string name="historial">Historial de Partides</string>
     <string name="dificult">"Nivells de dificultat disponibles:"</string>
     <string name="nfacil">"Fàcil"</string>
     <integer name="ems">10</integer>
+    <string name="cons">Consultar Partida</string>
+    <string name="torna">Tornar Endarrera</string>
+    <string name="search">Search</string>
+    <string name="delete">Borrar</string>
+    <string name="action_setting">Configuració</string>
+    <string name="general">General</string>
+    <string name="introduir">Introdueixi un alias:</string>
     <string name="nmig">"Mig"</string>
     <string name="ndificil">"Difícil"</string>
     <string name="res">"RESULTATS PARTIDA"</string>
@@ -31,6 +50,11 @@
     <string name="emto">"E-mail Destinatari:"</string>
     <string name="correu">"exemple@exemple.com"</string>
     <string name="nova">Nova Partida</string>
+    <string name="exp">Determini el nom identificador en les partides.</string>
+    <string name="descmida">Seleccioni la mida del taulell desitjat</string>
+    <string name="midakey">mida</string>
+    <string name="midatau">Mida del taulell</string>
+    <string name="aliaskey">"alias"</string>
     <string name="emt">"Heu empatat!"</string>
     <string name="cpuguanyat">"Vosté ha perdut!"</string>
     <string name="jugadorguanyat">"Vosté ha guanyat!"</string>
@@ -54,4 +78,25 @@
     <string name="redo">Redo</string>
     <string name="undo">Undo</string>
     <string name="indexlist">Index List</string>
+    <string name="guardatdata">Partida guardada</string>
+    <string name="errorguardat">Error partida guardada</string>
+    <string name="detall">Detall</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="initlog">LOG…\nAlias = %s, Mida Graella = %d\n%s\n</string>
+    <string name="log">log</string>
+    <string name="blog">Temps in. tirada = %s scs; Temps fin. tirada = %s scs\n</string>
+    <string name="tres">Temps restant = %d\n</string>
+    <string name="casoc">Casella ocupada: (%d,%d)\n</string>
+    <string name="troig">Torn del jugador ROIG\n</string>
+    <string name="tgroc">Torn del jugador GROC\n</string>
+    <string name="query">SELECT  * FROM score</string>
+    <string name="mg">Mida de la graella: </string>
+    <string name="al">Alias: </string>
+    <string name="dat">Data: </string>
+    <string name="noal">Alias: No s\'ha definit un alias!</string>
+    <string name="notemps">No s\'ha marcat control de temps</string>
+    <string name="contemps">S\'ha marcat control de temps</string>
+    <string name="temtot">Temps total empleat: </string>
 </resources>

@@ -3,12 +3,17 @@
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" >
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
     <TextView
         android:id="@+id/textView"
-        android:textSize="@dimen/ts"
+        android:textSize="@dimen/tm"
         android:layout_marginTop="@dimen/mup"
         android:layout_marginBottom="@dimen/mup"
         android:fontFamily="sans-serif-thin"
@@ -76,10 +81,15 @@
                 android:text="@string/correu" />
         </LinearLayout>
     </ScrollView>
+    </LinearLayout>
     <LinearLayout
-        android:layout_width="200dp"
-        android:layout_marginBottom="@dimen/mupm"
-        android:layout_gravity="center"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/mupm"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <Button
@@ -106,5 +116,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sortir" />
+    </LinearLayout>
     </LinearLayout>
 </LinearLayout>

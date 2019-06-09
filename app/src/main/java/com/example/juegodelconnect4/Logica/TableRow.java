@@ -9,6 +9,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.juegodelconnect4.Fragments.LogFrag;
 import com.example.juegodelconnect4.R;
 
 public class TableRow extends BaseAdapter {
@@ -55,7 +56,6 @@ public class TableRow extends BaseAdapter {
 
         if(game.state == State.RED) btn.setImageResource(R.drawable.r);
         else btn.setImageResource(R.drawable.y);
-
         btn.setOnClickListener(new View.OnClickListener()
         {
             @Override

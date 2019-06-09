@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory
+        android:title="@string/general">
+        <EditTextPreference
+            android:dialogTitle="@string/introduir"
+            android:inputType="text"
+            android:key="@string/aliaskey"
+            android:summary="@string/exp"
+            android:title="@string/alias"/>
+        <ListPreference
+            android:dialogTitle="@string/descmida"
+            android:entries="@array/mides"
+            android:entryValues="@array/mides"
+            android:key="@string/midakey"
+            android:summary="@string/descmida"
+            android:title="@string/midagraella"
+            android:defaultValue="7"/>
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/controldetemps">
+        <CheckBoxPreference
+            android:key="@string/timekey"
+            android:summary="@string/marcar"
+            android:title="@string/controldetemps"
+            android:defaultValue="false"/>
+
+        <EditTextPreference
+            android:defaultValue="25"
+            android:dependency="@string/timekey"
+            android:dialogTitle="@string/segons"
+            android:inputType="number"
+            android:key="@string/tempskey"
+            android:summary="@string/segons"
+            android:title="@string/segonstitle"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/mode">
+        <SwitchPreference
+            android:defaultValue="true"
+            android:key="@string/modekey"
+            android:summary="@string/cpudesc"
+            android:title="@string/jugarcpu"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>

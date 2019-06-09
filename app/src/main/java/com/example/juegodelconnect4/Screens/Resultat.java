@@ -2,12 +2,20 @@ package com.example.juegodelconnect4.Screens;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Build;
+import android.os.CountDownTimer;
+import android.preference.ListPreference;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -16,9 +24,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.juegodelconnect4.Database.GameSQLiteHelper;
+import com.example.juegodelconnect4.Logica.Game;
 import com.example.juegodelconnect4.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class Resultat extends AppCompatActivity {
 
@@ -28,6 +41,8 @@ public class Resultat extends AppCompatActivity {
     private String date;
     private String fin;
     private String logc;
+    private boolean timer;
+    private boolean writeDB;
 
     private Bundle extras;
 
@@ -41,16 +56,21 @@ public class Resultat extends AppCompatActivity {
         extras = in.getBundleExtra(getResources().getString(R.string.extrasbundle));
 
         fin = extras.getString(getResources().getString(R.string.fin));
-        alias = extras.getString(getResources().getString(R.string.alias));
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        alias = prefs.getString(getResources().getString(R.string.aliaskey),"");
         total = extras.getInt(getResources().getString(R.string.total), 0);
-        size = extras.getInt(getResources().getString(R.string.sizekey), 0);
+        size = Integer.parseInt(prefs.getString(getResources().getString(R.string.midakey), "7"));
+        timer = prefs.getBoolean(getResources().getString(R.string.timekey), false);
 
-        date = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
+        date=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new Locale("es", "ES")).format(new Date(new Date().getTime()));
         ti.setText(date);
 
         customButtons();
-        if(fin == null){fin = new String();}
-        compose();
+        if(fin == null)fin = new String();
+        if(savedInstanceState == null) {
+            writeDB();
+            compose();
+        }
     }
 
     @SuppressLint("IntentReset")
@@ -65,7 +85,7 @@ public class Resultat extends AppCompatActivity {
     }
 
     public void novaPartida(View view) {
-        startActivity(new Intent(this, Configuracio.class));
+        startActivity(new Intent(this, Game.class));
         finish();
     }
 
@@ -74,22 +94,6 @@ public class Resultat extends AppCompatActivity {
         System.exit(0);
     }
 
-    public void imageToasts(String s, int d){
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.toast,
-                (ViewGroup) findViewById(R.id.toast_layout_root));
-
-        ImageView image = layout.findViewById(R.id.image);
-        image.setImageResource(d);
-        TextView text = layout.findViewById(R.id.text);
-        text.setText(s);
-
-        Toast toast = new Toast(getApplicationContext());
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
-    }
 
     public void compose() {
         EditText log;
@@ -98,21 +102,21 @@ public class Resultat extends AppCompatActivity {
             imageToast(getResources().getString(R.string.emt), R.drawable.tie);
             logc = String.format(getResources().getString(R.string.base), alias, size, total)+'\n';
             logc += getResources().getString(R.string.emt);
-            imageToast(getResources().getString(R.string.emt), R.drawable.tie);
+            //imageToast(getResources().getString(R.string.emt), R.drawable.tie);
         }else{
             logc = String.format(getResources().getString(R.string.base), alias, size, total)+'\n';
             if(fin.equals(getResources().getString(R.string.guanyat))){
                 imageToast(getResources().getString(R.string.guanyat), R.drawable.win);
                 logc += getResources().getString(R.string.guanyat);
-                imageToast(getResources().getString(R.string.guanyat), R.drawable.win);
+                //imageToast(getResources().getString(R.string.guanyat), R.drawable.win);
             }else if(fin.equals(getResources().getString(R.string.perdut))){
                 imageToast(getResources().getString(R.string.perdut), R.drawable.lost);
                 logc += getResources().getString(R.string.perdut);
-                imageToast(getResources().getString(R.string.perdut), R.drawable.lost);
+                //imageToast(getResources().getString(R.string.perdut), R.drawable.lost);
             }else{
                 imageToast(getResources().getString(R.string.timespend), R.drawable.timer);
                 logc += getResources().getString(R.string.timespend);
-                imageToast(getResources().getString(R.string.timespend), R.drawable.timer);
+                //imageToast(getResources().getString(R.string.timespend), R.drawable.timer);
             }
         }
         log.setText(logc);
@@ -127,6 +131,9 @@ public class Resultat extends AppCompatActivity {
         image.setImageResource(d);
         TextView text = layout.findViewById(R.id.text);
         text.setText(s);
+        TextView textDB = layout.findViewById(R.id.textDB);
+        if(writeDB) textDB.setText(getString(R.string.guardatdata));
+        else textDB.setText(getString(R.string.errorguardat));
 
         Toast toast = new Toast(getApplicationContext());
         toast.setDuration(Toast.LENGTH_LONG);
@@ -144,5 +151,42 @@ public class Resultat extends AppCompatActivity {
             no.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             so.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
         }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.config, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                Intent in = new Intent(this, Configuracio.class);
+                startActivity(in);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
+    }
+
+    public void writeDB(){
+        GameSQLiteHelper SQLHelper = new GameSQLiteHelper(this.getApplicationContext());
+
+        writeDB = SQLHelper.addScore(alias, date, size, timer ? 1: 0, Integer.toString(total), fin);
+        /*new CountDownTimer(500, 500) {
+
+            public void onTick(long millisUntilFinished) {
+            }
+            public void onFinish() {
+                Toast toast = Toast.makeText(Resultat.this,getString(R.string.guardatdata), Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            }
+
+        }.start();*/
     }
 }
