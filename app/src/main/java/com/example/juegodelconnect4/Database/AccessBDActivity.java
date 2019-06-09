@@ -19,6 +19,7 @@ import com.example.juegodelconnect4.R;
 
 public class AccessBDActivity extends AppCompatActivity implements QueryFrag.ConsultaListener{
     private boolean tablet;
+    String[] data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +32,26 @@ public class AccessBDActivity extends AppCompatActivity implements QueryFrag.Con
     }
 
     @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState){
+        super.onRestoreInstanceState(savedInstanceState);
+        if(tablet){
+            data = savedInstanceState.getStringArray(getResources().getString(R.string.data));
+            RegFrag reg = (RegFrag) getSupportFragmentManager().findFragmentById(R.id.regfrag);
+            reg.showInfo(data);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if(tablet) outState.putStringArray(getResources().getString(R.string.data), data);
+    }
+
+    @Override
     public void itemSelected(ListView l, View v, int position, long id) {
         Cursor cursor = (Cursor) l.getAdapter().getItem(position);
 
-        String [] data = {
+        data = new String[]{
                 cursor.getString(1),
                 cursor.getString(2),
                 cursor.getString(3),
