@@ -382,7 +382,7 @@ public class Game extends AppCompatActivity {
             else blog += getString(R.string.tgroc);
         }
         blog += String.format(getString(R.string.blog), in, fi);
-        if(time) blog += String.format(getString(R.string.tres), expendtime);
+        if(time) blog += String.format(getString(R.string.tres), selectedtime);
         blog += String.format(getString(R.string.casoc), pos.getRow(), pos.getColumn());
         blog += '\n';
         log += blog;
